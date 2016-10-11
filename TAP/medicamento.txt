@@ -1,0 +1,5 @@
+Tylenol,15,10,Un
+Ibuprofeno,15,10,Ml
+Diclofenaco,15,10,Un
+Diclofenaco,15,10,Ml
+Pomada,10,15,Un
