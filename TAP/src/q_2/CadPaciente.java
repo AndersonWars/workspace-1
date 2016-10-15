@@ -118,6 +118,7 @@ public class CadPaciente extends Composite {
 				btnExcluir.setEnabled(false);
 				btnAlterar.setEnabled(false);
 				btnCadastrar.setEnabled(true);
+				limpaJanela();
 			}
 		});
 		btnExcluir.setBounds(403, 72, 75, 25);
