@@ -17,6 +17,8 @@ import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.MouseAdapter;
 import org.eclipse.swt.events.MouseEvent;
+import org.eclipse.swt.events.ModifyListener;
+import org.eclipse.swt.events.ModifyEvent;
 
 public class CadPaciente extends Composite {
 	private Text txtNome;
@@ -26,6 +28,10 @@ public class CadPaciente extends Composite {
 	private Button btnMasculino;
 	private Button btnFeminino;
 	private Paciente pacSel;
+	private Text txtFiltro;
+	private Button btnComeaCom;
+	private Button btnPossui;
+	private Button btnTerminaCom;
 	
 	/**
 	 * Create the composite.
@@ -72,26 +78,15 @@ public class CadPaciente extends Composite {
 				else
 					mensagem("Erro", "Cadastro não pode ser feito");
 				limpaJanela();
-				preencheTabela();
+				preencheTabela(false,0);
 			}
 		});
 		btnCadastrar.setBounds(403, 10, 75, 25);
 		btnCadastrar.setText("Cadastrar");
 		
 		table = new Table(this, SWT.BORDER | SWT.FULL_SELECTION);
-		table.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseDoubleClick(MouseEvent e) {
-				pacSel = pacientes.get(table.getSelectionIndex());
-				txtNome.setText(pacSel.getNome());
-				txtIdade.setText(pacSel.getIdade()+"");
-				if(pacSel.getSexo()=='M')
-					btnMasculino.setSelection(true);
-				else
-					btnFeminino.setSelection(true);
-			}
-		});
-		table.setBounds(10, 108, 452, 182);
+		
+		table.setBounds(10, 178, 468, 182);
 		table.setHeaderVisible(true);
 		table.setLinesVisible(true);
 		
@@ -115,17 +110,79 @@ public class CadPaciente extends Composite {
 				pacSel.setIdade(Integer.parseInt(txtIdade.getText()));
 				pacSel.setSexo(btnMasculino.getSelection()?'M':'F');
 				pacSel.altera();
-				preencheTabela();
+				preencheTabela(false,0);
+				limpaJanela();
 			}
 		});
 		btnAlterar.setBounds(403, 41, 75, 25);
 		btnAlterar.setText("Alterar");
 		
 		Button btnExcluir = new Button(this, SWT.NONE);
+		btnExcluir.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				pacSel.exclui();
+				preencheTabela(false, 0);
+				btnExcluir.setEnabled(false);
+				btnAlterar.setEnabled(false);
+			}
+		});
 		btnExcluir.setBounds(403, 72, 75, 25);
 		btnExcluir.setText("Excluir");
-
-		preencheTabela();
+		
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseDoubleClick(MouseEvent e) {
+				pacSel = pacientes.get(table.getSelectionIndex());
+				txtNome.setText(pacSel.getNome());
+				txtIdade.setText(pacSel.getIdade()+"");
+				if(pacSel.getSexo()=='M'){
+					btnMasculino.setSelection(true);
+					btnFeminino.setSelection(false);
+				}else{
+					btnFeminino.setSelection(true);
+					btnMasculino.setSelection(false);
+				}
+				btnAlterar.setEnabled(true);
+				btnExcluir.setEnabled(true);
+			}
+		});
+		
+		txtFiltro = new Text(this, SWT.BORDER);
+		txtFiltro.addModifyListener(new ModifyListener() {
+			public void modifyText(ModifyEvent arg0) {
+				int op;
+				if(btnComeaCom.getSelection())
+					op=1;
+				else if(btnPossui.getSelection())
+					op=2;
+				else
+					op=3;
+				preencheTabela(true, op);
+			}
+		});
+		txtFiltro.setBounds(10, 151, 468, 21);
+		
+		Group grpFiltro = new Group(this, SWT.NONE);
+		grpFiltro.setText("Filtro");
+		grpFiltro.setBounds(10, 101, 359, 44);
+		
+		btnComeaCom = new Button(grpFiltro, SWT.RADIO);
+		btnComeaCom.setSelection(true);
+		btnComeaCom.setBounds(10, 21, 90, 16);
+		btnComeaCom.setText("Come\u00E7a com:");
+		
+		btnPossui = new Button(grpFiltro, SWT.RADIO);
+		btnPossui.setBounds(132, 21, 90, 16);
+		btnPossui.setText("Possui:");
+		
+		btnTerminaCom = new Button(grpFiltro, SWT.RADIO);
+		btnTerminaCom.setBounds(259, 21, 90, 16);
+		btnTerminaCom.setText("Termina com:");
+		
+		btnAlterar.setEnabled(false);
+		btnExcluir.setEnabled(false);
+		preencheTabela(false,0);
 	}
 	
 	private void mensagem(String titulo, String msg){
@@ -142,9 +199,12 @@ public class CadPaciente extends Composite {
 		btnFeminino.setSelection(false);
 	}
 	
-	private void preencheTabela(){
+	private void preencheTabela(boolean filtro, int op){
 		table.setItemCount(0);
-		pacientes = Paciente.listaTudo();
+		if(filtro)
+			pacientes = Paciente.listaFiltro(txtFiltro.getText(), op);
+		else
+			pacientes = Paciente.listaTudo();
 		for (Paciente p : pacientes) {
 			TableItem it= new TableItem(table, SWT.NONE);
 			it.setText(p.toArray());

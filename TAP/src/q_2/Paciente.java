@@ -65,9 +65,32 @@ public class Paciente {
 	
 	public static ArrayList<Paciente> listaTudo(){
 		ArrayList<Paciente> lista = new ArrayList<Paciente>();
-		String sql = "select * from paciente order by nome";
+		String sql = "select * from paciente where ativo='s' order by nome";
 		try{
 			PreparedStatement ps = JanelaSwt.conn.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()){
+				Paciente p = new Paciente(rs.getString("nome"), rs.getInt("idade"), rs.getString("sexo").charAt(0));
+				p.setCodigo(rs.getInt("codigo"));
+				lista.add(p);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return lista;
+	}
+	
+	public static ArrayList<Paciente> listaFiltro(String filtro, int op){
+		ArrayList<Paciente> lista = new ArrayList<Paciente>();
+		String sql = "select * from paciente where ativo='s' and nome like ? order by nome";
+		try{
+			PreparedStatement ps = JanelaSwt.conn.prepareStatement(sql);
+			if(op==1)
+				ps.setString(1, filtro+"%");
+			else if(op==2)
+				ps.setString(1, "%"+filtro+"%");
+			else
+				ps.setString(1, "%"+filtro);
 			ResultSet rs = ps.executeQuery();
 			while(rs.next()){
 				Paciente p = new Paciente(rs.getString("nome"), rs.getInt("idade"), rs.getString("sexo").charAt(0));
