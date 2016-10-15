@@ -1,6 +1,11 @@
 package q_2;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+
 public class Paciente {
+	private int codigo;
 	private String nome;
 	private int idade;
 	private char sexo;
@@ -12,6 +17,67 @@ public class Paciente {
 		else
 			throw new NumberFormatException();
 		setSexo(sexo);
+	}
+	
+	public int cadastra(){
+		int qt = 0;
+		String sql = "insert into paciente (nome, idade, sexo) values (?,?,?)";
+		try{
+			PreparedStatement ps = JanelaSwt.conn.prepareStatement(sql);
+			ps.setString(1, getNome());
+			ps.setInt(2, getIdade());
+			ps.setString(3, getSexo()+"");
+			qt = ps.executeUpdate();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return qt;
+	}
+	
+	public int altera(){
+		int qt = 0;
+		String sql = "update paciente set nome=?, idade=?, sexo=? where codigo=? ";
+		try{
+			PreparedStatement ps = JanelaSwt.conn.prepareStatement(sql);
+			ps.setString(1, getNome());
+			ps.setInt(2, getIdade());
+			ps.setString(3, getSexo()+"");
+			ps.setInt(4, getCodigo());
+			qt = ps.executeUpdate();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return qt;
+	}
+	
+	public int exclui(){
+		int qt = 0;
+		String sql = "update paciente set ativo='n' where codigo=?";
+		try{
+			PreparedStatement ps = JanelaSwt.conn.prepareStatement(sql);
+			ps.setInt(1, getCodigo());
+			qt = ps.executeUpdate();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return qt;
+	}
+	
+	public static ArrayList<Paciente> listaTudo(){
+		ArrayList<Paciente> lista = new ArrayList<Paciente>();
+		String sql = "select * from paciente order by nome";
+		try{
+			PreparedStatement ps = JanelaSwt.conn.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()){
+				Paciente p = new Paciente(rs.getString("nome"), rs.getInt("idade"), rs.getString("sexo").charAt(0));
+				p.setCodigo(rs.getInt("codigo"));
+				lista.add(p);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return lista;
 	}
 	
 	public String[] toArray(){
@@ -40,6 +106,16 @@ public class Paciente {
 	public void setSexo(char sexo) {
 		this.sexo = sexo;
 	}
+
+	public int getCodigo() {
+		return codigo;
+	}
+
+	public void setCodigo(int codigo) {
+		this.codigo = codigo;
+	}
+	
+	
 	
 	
 }

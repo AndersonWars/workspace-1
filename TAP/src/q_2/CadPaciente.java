@@ -25,7 +25,8 @@ public class CadPaciente extends Composite {
 	private ArrayList<Paciente> pacientes = new ArrayList<Paciente>();
 	private Button btnMasculino;
 	private Button btnFeminino;
-
+	private Paciente pacSel;
+	
 	/**
 	 * Create the composite.
 	 * @param parent
@@ -65,24 +66,29 @@ public class CadPaciente extends Composite {
 		btnCadastrar.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e){
-				try{
-					pacientes.add(new Paciente(txtNome.getText(), Integer.parseInt(txtIdade.getText()), btnMasculino.getSelection()==true?'M':'F'));
-				}catch(NumberFormatException err){
-					mensagem("Erro", "Confira sua idade");
-				}
-				preencheTabela();
+				Paciente p = new Paciente(txtNome.getText(), Integer.parseInt(txtIdade.getText()), (btnMasculino.getSelection()?'M':'F'));
+				if(p.cadastra()==1)
+					mensagem("Feito", "Cadastro realizado com sucesso");
+				else
+					mensagem("Erro", "Cadastro não pode ser feito");
 				limpaJanela();
+				preencheTabela();
 			}
 		});
-		btnCadastrar.setBounds(387, 77, 75, 25);
+		btnCadastrar.setBounds(403, 10, 75, 25);
 		btnCadastrar.setText("Cadastrar");
 		
 		table = new Table(this, SWT.BORDER | SWT.FULL_SELECTION);
 		table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseDoubleClick(MouseEvent e) {
-				pacientes.remove(table.getSelectionIndex());
-				preencheTabela();
+				pacSel = pacientes.get(table.getSelectionIndex());
+				txtNome.setText(pacSel.getNome());
+				txtIdade.setText(pacSel.getIdade()+"");
+				if(pacSel.getSexo()=='M')
+					btnMasculino.setSelection(true);
+				else
+					btnFeminino.setSelection(true);
 			}
 		});
 		table.setBounds(10, 108, 452, 182);
@@ -100,7 +106,26 @@ public class CadPaciente extends Composite {
 		TableColumn tblclmnSexo = new TableColumn(table, SWT.NONE);
 		tblclmnSexo.setWidth(110);
 		tblclmnSexo.setText("Sexo");
+		
+		Button btnAlterar = new Button(this, SWT.NONE);
+		btnAlterar.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				pacSel.setNome(txtNome.getText());
+				pacSel.setIdade(Integer.parseInt(txtIdade.getText()));
+				pacSel.setSexo(btnMasculino.getSelection()?'M':'F');
+				pacSel.altera();
+				preencheTabela();
+			}
+		});
+		btnAlterar.setBounds(403, 41, 75, 25);
+		btnAlterar.setText("Alterar");
+		
+		Button btnExcluir = new Button(this, SWT.NONE);
+		btnExcluir.setBounds(403, 72, 75, 25);
+		btnExcluir.setText("Excluir");
 
+		preencheTabela();
 	}
 	
 	private void mensagem(String titulo, String msg){
@@ -119,6 +144,7 @@ public class CadPaciente extends Composite {
 	
 	private void preencheTabela(){
 		table.setItemCount(0);
+		pacientes = Paciente.listaTudo();
 		for (Paciente p : pacientes) {
 			TableItem it= new TableItem(table, SWT.NONE);
 			it.setText(p.toArray());

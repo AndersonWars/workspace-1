@@ -1,8 +1,8 @@
 package q_2;
 
-import java.sql.Array;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 public class Medicamento {
 	private int codigo;
@@ -34,18 +34,84 @@ public class Medicamento {
 	
 	public int cadastra(){
 		int qt = 0;
-		String sql = "select * from medicamento order by nome";
+		String sql = "insert into medicamento (nome, valor, qt_caixa) values (?,?,?)";
 		try{
 			PreparedStatement ps = JanelaSwt.conn.prepareStatement(sql);
-			ps.setString(1, "2");
-			//ps.setDouble(2, getValor());
-			//ps.setInt(3, getQtd());
+			ps.setString(1, getNome());
+			ps.setDouble(2, getValor());
+			ps.setInt(3, getQtd());
 			qt = ps.executeUpdate();
-			ResultSet rs = ps.executeQuery();
+			//ResultSet rs = ps.executeQuery();
 		}catch(Exception e){
 			e.printStackTrace();
 		}
 		return qt;
+	}
+	
+	public int altera(){
+		int qt = 0;
+		String sql = "update medicamento set nome=?, valor=?, qt_caixa=? where codigo=?";
+		try{
+			PreparedStatement ps = JanelaSwt.conn.prepareStatement(sql);
+			ps.setString(1, getNome());
+			ps.setDouble(2, getValor());
+			ps.setInt(3, getQtd());
+			ps.setInt(4, getCodigo());
+			qt = ps.executeUpdate();
+			//ResultSet rs = ps.executeQuery();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return qt;
+	}
+	
+	public int exclui(){
+		int qt = 0;
+		String sql = "update medicamento set ativo='n' where codigo=?";
+		try{
+			PreparedStatement ps = JanelaSwt.conn.prepareStatement(sql);
+			ps.setInt(1, getCodigo());
+			qt = ps.executeUpdate();
+			//ResultSet rs = ps.executeQuery();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return qt;
+	}
+	
+	public static ArrayList<Medicamento> listaTodos(){
+		ArrayList<Medicamento> lista = new ArrayList<Medicamento>();
+		String sql = "select * from medicamento where ativo='s' order by nome";
+		try{
+			PreparedStatement ps = JanelaSwt.conn.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()){
+				Medicamento m = new Medicamento(rs.getString("nome"), rs.getInt("qt_caixa"), rs.getDouble("valor"));
+				m.setCodigo(rs.getInt("codigo"));
+				lista.add(m);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return lista;
+	}
+	
+	public static ArrayList<Medicamento> listaFiltro(String filtro){
+		ArrayList<Medicamento> lista = new ArrayList<Medicamento>();
+		String sql = "select * from medicamento where ativo='s' and nome like ? order by nome";
+		try{
+			PreparedStatement ps = JanelaSwt.conn.prepareStatement(sql);
+			ps.setString(1, filtro);
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()){
+				Medicamento m = new Medicamento(rs.getString("nome"), rs.getInt("qt_caixa"), rs.getDouble("valor"));
+				m.setCodigo(rs.getInt("codigo"));
+				lista.add(m);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return lista;
 	}
 	
 	public String[] toArray(){
