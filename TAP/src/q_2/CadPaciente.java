@@ -72,11 +72,13 @@ public class CadPaciente extends Composite {
 		btnCadastrar.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e){
-				Paciente p = new Paciente(txtNome.getText(), Integer.parseInt(txtIdade.getText()), (btnMasculino.getSelection()?'M':'F'));
-				if(p.cadastra()==1)
-					mensagem("Feito", "Cadastro realizado com sucesso");
-				else
-					mensagem("Erro", "Cadastro não pode ser feito");
+				try{
+					Paciente p = new Paciente(txtNome.getText(), Integer.parseInt(txtIdade.getText()), (btnMasculino.getSelection()?'M':'F'));
+					if(p.cadastra()==1)
+						mensagem("Feito", "Cadastro realizado com sucesso");					
+				}catch(NumberFormatException err){
+					mensagem("Erro", "Confira inserção dos dados");
+				}
 				limpaJanela();
 				preencheTabela(false,0);
 			}
@@ -103,17 +105,7 @@ public class CadPaciente extends Composite {
 		tblclmnSexo.setText("Sexo");
 		
 		Button btnAlterar = new Button(this, SWT.NONE);
-		btnAlterar.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				pacSel.setNome(txtNome.getText());
-				pacSel.setIdade(Integer.parseInt(txtIdade.getText()));
-				pacSel.setSexo(btnMasculino.getSelection()?'M':'F');
-				pacSel.altera();
-				preencheTabela(false,0);
-				limpaJanela();
-			}
-		});
+		
 		btnAlterar.setBounds(403, 41, 75, 25);
 		btnAlterar.setText("Alterar");
 		
@@ -125,26 +117,47 @@ public class CadPaciente extends Composite {
 				preencheTabela(false, 0);
 				btnExcluir.setEnabled(false);
 				btnAlterar.setEnabled(false);
+				btnCadastrar.setEnabled(true);
 			}
 		});
 		btnExcluir.setBounds(403, 72, 75, 25);
 		btnExcluir.setText("Excluir");
 		
+		btnAlterar.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				pacSel.setNome(txtNome.getText());
+				pacSel.setIdade(Integer.parseInt(txtIdade.getText()));
+				pacSel.setSexo(btnMasculino.getSelection()?'M':'F');
+				pacSel.altera();
+				preencheTabela(false,0);
+				limpaJanela();
+				btnAlterar.setEnabled(false);
+				btnExcluir.setEnabled(false);
+				btnCadastrar.setEnabled(true);
+			}
+		});
+		
 		table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseDoubleClick(MouseEvent e) {
-				pacSel = pacientes.get(table.getSelectionIndex());
-				txtNome.setText(pacSel.getNome());
-				txtIdade.setText(pacSel.getIdade()+"");
-				if(pacSel.getSexo()=='M'){
-					btnMasculino.setSelection(true);
-					btnFeminino.setSelection(false);
-				}else{
-					btnFeminino.setSelection(true);
-					btnMasculino.setSelection(false);
+				try{
+					pacSel = pacientes.get(table.getSelectionIndex());
+					txtNome.setText(pacSel.getNome());
+					txtIdade.setText(pacSel.getIdade()+"");
+					if(pacSel.getSexo()=='M'){
+						btnMasculino.setSelection(true);
+						btnFeminino.setSelection(false);
+					}else{
+						btnFeminino.setSelection(true);
+						btnMasculino.setSelection(false);
+					}
+					btnAlterar.setEnabled(true);
+					btnExcluir.setEnabled(true);
+				}catch(Exception err){
+					mensagem("Erro","Seleção inválida");
 				}
-				btnAlterar.setEnabled(true);
-				btnExcluir.setEnabled(true);
+				btnCadastrar.setEnabled(false);
 			}
 		});
 		

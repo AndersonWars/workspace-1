@@ -11,10 +11,10 @@ public class Paciente {
 	private char sexo;
 	
 	public Paciente(String nome, int idade, char sexo) throws NumberFormatException {
-		setNome(nome);
-		if(idade>=0)
+		if(idade>=0 && nome!=null){
+			setNome(nome);
 			setIdade(idade);
-		else
+		}else
 			throw new NumberFormatException();
 		setSexo(sexo);
 	}
