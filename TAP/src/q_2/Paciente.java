@@ -19,6 +19,8 @@ public class Paciente {
 		setSexo(sexo);
 	}
 	
+	public Paciente() {}
+	
 	public int cadastra(){
 		int qt = 0;
 		String sql = "insert into paciente (nome, idade, sexo) values (?,?,?)";
@@ -101,6 +103,24 @@ public class Paciente {
 			e.printStackTrace();
 		}
 		return lista;
+	}
+	
+	public static Paciente buscarPorId(int id){
+		Paciente p = null;
+		String sql = "select * from paciente where ativo='s'and codigo=? order by nome";
+		try{
+			PreparedStatement ps = JanelaSwt.conn.prepareStatement(sql);
+			ps.setInt(1, id);
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()){
+				p = new Paciente(rs.getString("nome"), rs.getInt("idade"), rs.getString("sexo").charAt(0));
+				p.setCodigo(rs.getInt("codigo"));
+				
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return p;
 	}
 	
 	public String[] toArray(){

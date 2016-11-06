@@ -111,6 +111,44 @@ public class JanelaSwt extends Shell {
 		});
 		mntmPacientemed.setText("Paciente_Med");
 		
+		MenuItem mntmConsulta = new MenuItem(menu_1, SWT.NONE);
+		mntmConsulta.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				CTabItem tabItem = jaAberto("Consulta 1");
+				if(tabItem==null){
+					tabItem = new CTabItem(tabFolder, SWT.NONE);
+					tabItem.setShowClose(true);
+					tabItem.setText("Consulta 1");
+					Composite composite = new TelaMedUtilz(tabFolder, SWT.NONE);
+					tabItem.setControl(composite);
+					tabFolder.setSelection(tabItem);
+				}else{
+					tabFolder.setSelection(tabItem);
+				}
+			}
+		});
+		mntmConsulta.setText("Consulta 1");
+		
+		MenuItem mntmConsulta_1 = new MenuItem(menu_1, SWT.NONE);
+		mntmConsulta_1.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				CTabItem tabItem = jaAberto("Consulta 2");
+				if(tabItem==null){
+					tabItem = new CTabItem(tabFolder, SWT.NONE);
+					tabItem.setShowClose(true);
+					tabItem.setText("Consulta 2");
+					Composite composite = new TelaConsulta2(tabFolder, SWT.NONE);
+					tabItem.setControl(composite);
+					tabFolder.setSelection(tabItem);
+				}else{
+					tabFolder.setSelection(tabItem);
+				}
+			}
+		});
+		mntmConsulta_1.setText("Consulta 2");
+		
 		new MenuItem(menu_1, SWT.SEPARATOR);
 		
 		MenuItem mntmSair = new MenuItem(menu_1, SWT.NONE);
@@ -124,7 +162,7 @@ public class JanelaSwt extends Shell {
 		
 		tabFolder = new CTabFolder(this, SWT.BORDER);
 		tabFolder.setSimple(false);
-		tabFolder.setBounds(0, 0, 563, 347);
+		tabFolder.setBounds(0, 0, 563, 397);
 		tabFolder.setSelectionBackground(Display.getCurrent().getSystemColor(SWT.COLOR_TITLE_INACTIVE_BACKGROUND_GRADIENT));
 		
 		
@@ -145,7 +183,7 @@ public class JanelaSwt extends Shell {
 	
 	protected void createContents() {
 		setText("Quest\u00E3o 2");
-		setSize(574, 406);
+		setSize(574, 456);
 
 	}
 

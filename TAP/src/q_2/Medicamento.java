@@ -19,6 +19,9 @@ public class Medicamento {
 			throw new NumberFormatException();
 	}
 	
+	public Medicamento() {
+	}
+	
 	/*SQL de alteração
 	 * update medicamento set nome=?, valor=?, qt_caixa=?
 	 * where codigo=?
@@ -101,7 +104,7 @@ public class Medicamento {
 		String sql = "select * from medicamento where ativo='s' and nome like ? order by nome";
 		try{
 			PreparedStatement ps = JanelaSwt.conn.prepareStatement(sql);
-			ps.setString(1, filtro);
+			ps.setString(1, filtro+"%");
 			ResultSet rs = ps.executeQuery();
 			while(rs.next()){
 				Medicamento m = new Medicamento(rs.getString("nome"), rs.getInt("qt_caixa"), rs.getDouble("valor"));
@@ -112,6 +115,23 @@ public class Medicamento {
 			e.printStackTrace();
 		}
 		return lista;
+	}
+	
+	public static Medicamento buscaPorId(int id){
+		Medicamento m = null;
+		String sql = "select * from medicamento where ativo='s' and codigo=? order by nome";
+		try{
+			PreparedStatement ps = JanelaSwt.conn.prepareStatement(sql);
+			ps.setInt(1, id);
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()){
+				m = new Medicamento((rs.getString("nome")), (rs.getInt("qt_caixa")), (rs.getDouble("valor")));
+				m.setCodigo(rs.getInt("codigo"));
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return m;
 	}
 	
 	public String[] toArray(){

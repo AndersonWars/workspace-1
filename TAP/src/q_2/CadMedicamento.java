@@ -8,6 +8,12 @@ import java.util.ArrayList;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Text;
+
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
+
 //import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Table;
@@ -137,6 +143,22 @@ public class CadMedicamento extends Composite {
 			}
 		});
 		txtFiltro.setBounds(10, 99, 430, 21);
+		
+		Button btnRelatrio = new Button(this, SWT.NONE);
+		btnRelatrio.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				JasperPrint impressao;
+				try{
+					impressao = JasperFillManager.fillReport("relatorios/Teste.jasper", null, JanelaSwt.conn);
+					JasperViewer.viewReport(impressao, false);
+				}catch(JRException err){
+					err.printStackTrace();
+				}
+			}
+		});
+		btnRelatrio.setBounds(5, 328, 75, 25);
+		btnRelatrio.setText("Relat\u00F3rio");
 		
 		preencheTabela(false);
 
