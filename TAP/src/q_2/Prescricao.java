@@ -25,6 +25,10 @@ public class Prescricao {
 		return 0;
 	}
 	
+	public static ArrayList<Prescricao> retornaLista(){
+		return TelaMedUtilz.presc;
+	}
+	
 	public static ArrayList<Prescricao> buscaPorPaciente(Paciente p){
 		ArrayList<Prescricao> lista = new ArrayList<>();
 		String sql = "select * from medicamento_paciente where cod_paciente=?";

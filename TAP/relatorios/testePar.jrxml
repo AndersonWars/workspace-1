@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="testePar" language="groovy" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="850bc1f2-9180-4f63-bffd-77ecdab8a0e3">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="PAR1" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["default"]]></defaultValueExpression>
+	</parameter>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="239" y="29" width="100" height="20" uuid="b8a85816-d1e2-488d-b97b-28b831ce4e3b"/>
+				<text><![CDATA[PARAMETRO]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="114" splitType="Stretch">
+			<staticText>
+				<reportElement x="17" y="40" width="124" height="20" uuid="7f47a68a-fb93-4d28-8d81-f3fce85e26e3"/>
+				<text><![CDATA[ENVIADO PELO JAVA:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="175" y="40" width="137" height="20" uuid="a4b826c9-6371-4245-ad80-1dbec7f19fe8"/>
+				<textFieldExpression><![CDATA[$P{PAR1}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+</jasperReport>

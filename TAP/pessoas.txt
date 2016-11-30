@@ -1,0 +1,4 @@
+teste,15,M
+Roussomano,45,M
+Carcamana,28,F
+Curico,9,M

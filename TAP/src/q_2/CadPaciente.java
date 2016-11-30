@@ -8,6 +8,12 @@ import java.util.ArrayList;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Text;
+
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
+
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Table;
@@ -88,7 +94,7 @@ public class CadPaciente extends Composite {
 		
 		table = new Table(this, SWT.BORDER | SWT.FULL_SELECTION);
 		
-		table.setBounds(10, 178, 468, 182);
+		table.setBounds(10, 178, 468, 143);
 		table.setHeaderVisible(true);
 		table.setLinesVisible(true);
 		
@@ -196,6 +202,22 @@ public class CadPaciente extends Composite {
 		
 		btnAlterar.setEnabled(false);
 		btnExcluir.setEnabled(false);
+		
+		Button btnRelatrio = new Button(this, SWT.NONE);
+		btnRelatrio.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				JasperPrint impressao;
+				try{
+					impressao = JasperFillManager.fillReport("relatorios/relPacientes.jasper", null, JanelaSwt.conn);
+					JasperViewer.viewReport(impressao, false);
+				}catch(JRException err){
+					err.printStackTrace();
+				}
+			}
+		});
+		btnRelatrio.setBounds(10, 327, 75, 25);
+		btnRelatrio.setText("Relat\u00F3rio");
 		preencheTabela(false,0);
 	}
 	

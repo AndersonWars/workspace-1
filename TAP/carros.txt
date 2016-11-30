@@ -1,0 +1,5 @@
+5,Chevrolet,Corsa,2003,13550,00,S,N,N,N.
+9,Ford,Ka,2008,12000,00,N,N,N,N.
+8,Honda,Civic,2010,35800,00,S,S,N,S,Alarme.
+6,Fiat,Uno,2014,27000,00,S,S,N,N,Alarme.
+7,Chevrolet,Camaro,2015,130000,00,S,S,N,S,Turbo.

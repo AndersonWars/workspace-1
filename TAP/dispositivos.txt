@@ -1,0 +1,3 @@
+Bateria,15.55
+Notebook,1800.0
+Telefone,300.0
