@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Formulario</title>
+	<script type="text/javascript">
+		function validaForm() {
+			nome = document.form.nome.value.trim();
+			idade = document.form.idade.value.trim();
+			sexo = document.form.sexo;
+			turno = document.form["turno[]"];
+
+			if (nome.indexOf(" ") ==-1) {
+				alert('Nome deve conter 2 palavras');
+				return false;
+			}
+				if (!isNaN(idade) || idade.length > 0) {
+					if (idade < 0 || idade > 150) {
+						alert('Idade inválida');
+						return false;
+					}
+				} else {
+					alert('Idade inválida');
+					return false;
+				}
+			
+				if (!sexo[0].checked && !sexo[1].checked) {
+					alert('Selecione um sexo');
+				}
+			
+				var selecionou = false;
+				for (var i = 0; i >= turno.length; i++) {
+					if (turno[i].checked) {
+						selecionou = true;
+					}
+				}
+				if (!selecionou) {
+					alert("Selecione 1 ou mais turnos");
+					return false;
+				}
+			
+				if (idade < 18 && turno[2].checked) {
+					alert('Turno proibido');
+				}
+			
+			return true;
+		}
+
+		function funcao() {
+			alert('teste');
+		}
+	</script>
+</head>
+<body>
+	<h1>Formulario</h1>
+	<form name="form" method="post" action="#" onsubmit="return validaForm()">
+	<table border="0" width="42%">
+	
+		<td>Nome</td>
+		<td><input type="text" name="nome"></td>
+		<tr>
+			<td>Sexo</td>
+			<td>
+			<input type="radio" name="sexo">Masculino
+			<input type="radio" name="sexo">Feminino
+			</td>
+		</tr>
+		<tr>
+			<td>Idade</td>
+			<td><input type="text" name="idade"></td>
+		</tr>
+		<tr>
+		<td>Turno</td>
+		<td>
+		<input type="checkbox" name="turno[]">Mat
+		<input type="checkbox" name="turno[]">Vesp
+		<input type="checkbox" name="turno[]">Not
+		</td>
+		</tr>
+		<tr>
+			<td><input type="submit" name="OK" value="OK"></td>
+			<td><input type="reset" name="limpa" value="Limpar"></td>
+		</tr>
+	</table>
+	</form>
+</body>
+</html>
