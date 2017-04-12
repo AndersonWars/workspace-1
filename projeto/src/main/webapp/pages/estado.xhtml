@@ -12,14 +12,31 @@ xmlns:f="http://xmlns.jcp.org/jsf/core">
 	<p:growl id="msg"/>
 	<h:form id="frmTab">
 		<p:panel header="Estados">
-			<p:dataTable emptyMessage="Sem registros" paginator="true">
+			<p:dataTable id="table" emptyMessage="Sem registros" paginator="true" value="#{estadoBean.estados}" var="uf" rows="3">
 				<f:facet name="header">
-					<p:commandButton value="Novo" oncomplete="PF('dlg').show();" actionListener="#{estadoBean.novo}"/>
+					<p:commandButton value="Novo" oncomplete="PF('dlg').show();" actionListener="#{estadoBean.novo}" update=":frmCad:telaCad"/>
 				</f:facet>	
-				<p:column headerText="Nome"></p:column>
-				<p:column headerText="Sigla"></p:column>
-				<p:column headerText="Opções"></p:column>	
+				<p:column headerText="Nome" sortBy="#{uf.nome}" filterBy="#{uf.nome}">
+					<h:outputText value="#{uf.nome}"/>
+				</p:column>
+				<p:column headerText="Sigla" sortBy="#{uf.sigla}" filterBy="#{uf.sigla}">
+					<h:outputText value="#{uf.sigla}"/>
+				</p:column>
+				<p:column headerText="Opções">
+					<p:commandButton icon="ui-icon-trash" actionListener="#{estadoBean.excluir}" update=":frmTab:table">
+						<p:confirm  header="Confirmação" message="Excluir UF?" icon="ui-icon-alert"/>
+						<f:attribute name="ufExcluir" value="#{uf}"/>
+					</p:commandButton>
+					<p:commandButton icon="ui-icon-pencil" oncomplete="PF('dlg').show();" actionListener="#{estadoBean.alterar}" update=":frmCad:telaCad">
+						<f:attribute name="ufAlterar" value="#{uf}"/>
+					</p:commandButton>
+				</p:column>	
 			</p:dataTable>
+			
+			<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+				<p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"></p:commandButton>
+				<p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"></p:commandButton>
+			</p:confirmDialog>
 		</p:panel>
 	</h:form>
 	
@@ -32,7 +49,7 @@ xmlns:f="http://xmlns.jcp.org/jsf/core">
 			<p:inputText size="10" maxlength="2" value="#{estadoBean.estado.sigla}"/>
 		</h:panelGrid>
 		<h:panelGrid columns="2">
-			<p:commandButton value="Salvar" actionListener="#{estadoBean.salvar}" update=":msg :frmCad:telaCad"/>
+			<p:commandButton value="Salvar" actionListener="#{estadoBean.salvar}" update=":msg :frmCad:telaCad :frmTab:table"/>
 			<p:commandButton value="Fechar" oncomplete="PF('dlg').hide();"/>
 		</h:panelGrid>
 		</h:form>

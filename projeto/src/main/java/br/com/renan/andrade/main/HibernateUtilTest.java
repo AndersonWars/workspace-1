@@ -14,7 +14,7 @@ public class HibernateUtilTest {
 //		Session sessao = HibernateUtil.getFabricaDeSessoes().openSession();
 //		sessao.close();
 //		HibernateUtil.getFabricaDeSessoes().close();
-		
+//		
 		EstadoDao dao = new EstadoDao();
 		ArrayList<Estado> lista = (ArrayList<Estado>)dao.listarTodos();
 		for (Estado e : lista) {
