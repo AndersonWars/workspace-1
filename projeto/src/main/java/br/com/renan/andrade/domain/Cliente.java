@@ -27,6 +27,9 @@ public class Cliente implements Serializable{
 	
 	@Column(length=10)
 	private String cep_cliente;
+	
+	@Column(length=13)
+	private String cpf_cliente;
 
 	public Long getCod_cliente() {
 		return cod_cliente;

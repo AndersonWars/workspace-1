@@ -7,6 +7,7 @@ xmlns:f="http://xmlns.jcp.org/jsf/core">
 <h:head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>Titulo</title>
+<h:outputStylesheet name="style.css"/>
 </h:head>
 <h:body>
 	<p:menubar>
@@ -16,14 +17,27 @@ xmlns:f="http://xmlns.jcp.org/jsf/core">
 	</p:menubar>
 	
 	<h:form id="frmCad">
-		<h:panelGrid columns="2">
-			<p:outputLabel value="Nome"/>
-			<p:inputText/>
-			<p:outputLabel value="CEP"/>
-			<p:inputText/>
-			<p:outputLabel value="Cidade"/>
-			<p:inputText/>
-		</h:panelGrid>
+		<p:panel header="Novo cliente">
+		<p:messages/>
+			<h:panelGrid columns="2">
+				<p:outputLabel value="Nome"/>
+				<p:inputText size="50" value="#{clienteBean.cliente.nom_cliente}"/>
+				<p:outputLabel value="CEP"/>
+				<p:inputMask mask="99999-999" size="50" value="#{clienteBean.cliente.cep_cliente}"/>
+				<p:outputLabel value="Cidade"/>
+				<p:inputText size="50" value="#{clienteBean.cliente.cid_cliente}"/>
+				<p:outputLabel value="CPF"/>
+				<p:inputMask mask="999.999.999-99" size="50" value="#{clienteBean.cliente.cpf}"/>
+				<p:outputLabel value="E-mail"/>
+				<p:inputText size="50"/>
+				<p:outputLabel value="Telefone"/>
+				<p:inputMask mask="(99)99999-9999" size="50"/>
+			</h:panelGrid>
+			<div align="right">
+				<p:commandButton value="Salvar" id="btSalvar"/>
+				<p:commandButton value="Cancelar" id="btCancelar"/>
+			</div>
+		</p:panel>
 	</h:form>
 </h:body>
 </html>

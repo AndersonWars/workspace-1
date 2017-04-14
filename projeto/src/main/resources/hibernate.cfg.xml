@@ -34,8 +34,8 @@
 		<!-- Mapeamento das entidades -->
 		<mapping class="br.com.renan.andrade.domain.Cidade"/>
 		<mapping class="br.com.renan.andrade.domain.Estado"/>
-		<!-- <mapping class="br.com.renan.andrade.domain.Cliente"/>
-		<mapping class="br.com.renan.andrade.domain.Produto"/>
+		<mapping class="br.com.renan.andrade.domain.Cliente"/>
+		<!-- <mapping class="br.com.renan.andrade.domain.Produto"/>
 		<mapping class="br.com.renan.andrade.domain.Venda"/>
 		<mapping class="br.com.renan.andrade.domain.ItensVenda"/> -->
 	</session-factory>
