@@ -19,7 +19,7 @@ public class ClienteBean implements Serializable{
 	
 	private Cliente cliente;
 	
-	@PostConstruct
+	//@PostConstruct
 	public void novo() {
 		cliente = new Cliente();
 	}
