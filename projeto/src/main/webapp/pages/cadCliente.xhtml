@@ -34,7 +34,7 @@ xmlns:f="http://xmlns.jcp.org/jsf/core">
 				<p:inputMask mask="(99)99999-9999" size="50"/>
 			</h:panelGrid>
 			<div align="right">
-				<p:commandButton value="Salvar" id="btSalvar"/>
+				<p:commandButton value="Salvar" id="btSalvar" actionListener="#{clienteBean.salvar}"/>
 				<p:commandButton value="Cancelar" id="btCancelar"/>
 			</div>
 		</p:panel>

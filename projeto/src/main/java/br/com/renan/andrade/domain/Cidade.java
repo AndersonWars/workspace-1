@@ -23,5 +23,14 @@ public class Cidade extends GenericDomain {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+
+	public Estado getUf() {
+		return uf;
+	}
+
+	public void setUf(Estado uf) {
+		this.uf = uf;
+	}
+	
 	
 }

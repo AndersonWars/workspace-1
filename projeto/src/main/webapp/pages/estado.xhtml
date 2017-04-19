@@ -44,9 +44,12 @@ xmlns:f="http://xmlns.jcp.org/jsf/core">
 		<h:form id="frmCad">
 		<h:panelGrid id="telaCad" columns="2">
 			<p:outputLabel value="Nome"/>
-			<p:inputText size="20" maxlength="30" value="#{estadoBean.estado.nome}"/>
+			<p:inputText size="20" maxlength="30" value="#{estadoBean.estado.nome}" required="true" requiredMessage="Nome Estado não inserido"/>
 			<p:outputLabel value="Sigla"/>
-			<p:inputText size="10" maxlength="2" value="#{estadoBean.estado.sigla}"/>
+			<p:inputText size="10" maxlength="2" value="#{estadoBean.estado.sigla}" validatorMessage="Sigla obrigatório: 2 caracteres">
+				<f:validateLength minimum="2"/>
+				<f:convertNumber locale="pt_BR" minFractionDigits="2"/>
+			</p:inputText>
 		</h:panelGrid>
 		<h:panelGrid columns="2">
 			<p:commandButton value="Salvar" actionListener="#{estadoBean.salvar}" update=":msg :frmCad:telaCad :frmTab:table"/>

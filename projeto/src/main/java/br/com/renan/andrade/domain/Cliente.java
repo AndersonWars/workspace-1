@@ -28,8 +28,16 @@ public class Cliente implements Serializable{
 	@Column(length=10)
 	private String cep_cliente;
 	
+	/*
 	@Column(length=13)
 	private String cpf_cliente;
+	
+	@Column(length=11)
+	private String tel_cliente;
+	
+	@Column(length=100)
+	private String email_cliente;
+	*/
 
 	public Long getCod_cliente() {
 		return cod_cliente;
@@ -71,6 +79,15 @@ public class Cliente implements Serializable{
 		this.cep_cliente = cep_cliente;
 	}
 	
+	/*
+	public String getCpf_cliente() {
+		return cpf_cliente;
+	}
+
+	public void setCpf_cliente(String cpf_cliente) {
+		this.cpf_cliente = cpf_cliente;
+	}
+	*/
 	
 
 }
