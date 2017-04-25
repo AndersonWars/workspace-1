@@ -19,7 +19,7 @@ public class Endereco implements Serializable{
 	private String cidade_endereco;
 	
 	@JoinColumn
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
 	private Estado cod_uf;
 	
 	@Column(length=10)
@@ -87,5 +87,34 @@ public class Endereco implements Serializable{
 		this.bairro_endereco = bairro_endereco;
 	}
 	
+	@Override
+	public String toString() {
+		return "Endereco[cod_Endereco" + getCod_endereco() + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((cod_endereco == null) ? 0 : cod_endereco.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Endereco other = (Endereco) obj;
+		if (cod_endereco == null) {
+			if (other.cod_endereco != null)
+				return false;
+		} else if (!cod_endereco.equals(other.cod_endereco))
+			return false;
+		return true;
+	}
 	
 }

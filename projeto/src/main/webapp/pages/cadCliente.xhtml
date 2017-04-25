@@ -15,26 +15,37 @@ xmlns:f="http://xmlns.jcp.org/jsf/core">
 		<p:submenu label="Produtos"></p:submenu>
 	</p:menubar>
 	
+	<p:growl id="msg"/>
 	<h:form id="frmCad">
 		<p:panel header="Novo cliente">
-		<p:messages/>
 			<h:panelGrid columns="2">
 				<p:outputLabel value="Nome"/>
 				<p:inputText size="50" value="#{clienteBean.cliente.nomeCliente}"/>
-				<p:outputLabel value="CEP"/>
-				<p:inputMask mask="99999-999" size="50" value="#{clienteBean.cliente.enderecoCliente.cep_endereco}"/>
-				<p:outputLabel value="Cidade"/>
-				<p:inputText size="50" value="#{clienteBean.cliente.enderecoCliente.cidade_endereco}"/>
 				<p:outputLabel value="CPF"/>
 				<p:inputMask mask="999.999.999-99" size="50" value="#{clienteBean.cliente.cpfCliente}"/>
 				<p:outputLabel value="E-mail"/>
 				<p:inputText size="50" value="#{clienteBean.cliente.emailCliente}"/>
 				<p:outputLabel value="Telefone"/>
 				<p:inputMask mask="(99)99999-9999" size="50" value="#{clienteBean.cliente.telCliente}"/>
+				<p:outputLabel value="CEP"/>
+				<p:inputMask mask="99999-999" size="50" value="#{clienteBean.cliente.enderecoCliente.cep_endereco}"/>
+				<p:outputLabel value="Estado"/>
+				<p:selectOneMenu converter="omnifaces.SelectItemsConverter">
+					<f:selectItem itemLabel="Escolha uma UF" itemValue=""/>
+					<f:selectItems value="#{clienteBean.estados}" var="uf" itemLabel="#{uf.nome}" itemValue="#{uf}"/>
+				</p:selectOneMenu>
+				<p:outputLabel value="Cidade"/>
+				<p:inputText size="50" value="#{clienteBean.cliente.enderecoCliente.cidade_endereco}"/>
+				<p:outputLabel value="Bairro"/>
+				<p:inputText size="50" value="#{clienteBean.cliente.enderecoCliente.bairro_endereco}"/>
+				<p:outputLabel value="Rua"/>
+				<p:inputText size="50" value="#{clienteBean.cliente.enderecoCliente.rua_endereco}"/>
+				<p:outputLabel value="Número"/>
+				<p:inputText size="50" value="#{clienteBean.cliente.enderecoCliente.nu_logradouro}"/>
 			</h:panelGrid>
 			<div align="right">
-				<p:commandButton value="Salvar" id="btSalvar" actionListener="#{clienteBean.salvar}"/>
-				<p:commandButton value="Cancelar" id="btCancelar"/>
+				<p:commandButton value="Salvar" id="btSalvar" actionListener="#{clienteBean.salvar}" update=":msg :frmCad"/>
+				<p:commandButton value="Cancelar" id="btCancelar" actionListener="#{cidadeBean.novo}" update=":msg :frmCad"/>
 			</div>
 		</p:panel>
 	</h:form>
