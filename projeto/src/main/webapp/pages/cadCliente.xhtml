@@ -6,8 +6,7 @@ xmlns:p="http://primefaces.org/ui"
 xmlns:f="http://xmlns.jcp.org/jsf/core">
 <h:head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Titulo</title>
-<h:outputStylesheet name="style.css"/>
+<title>Cadastro de clientes</title>
 </h:head>
 <h:body>
 	<p:menubar>
@@ -21,17 +20,17 @@ xmlns:f="http://xmlns.jcp.org/jsf/core">
 		<p:messages/>
 			<h:panelGrid columns="2">
 				<p:outputLabel value="Nome"/>
-				<p:inputText size="50" value="#{clienteBean.cliente.nom_cliente}"/>
+				<p:inputText size="50" value="#{clienteBean.cliente.nomeCliente}"/>
 				<p:outputLabel value="CEP"/>
-				<p:inputMask mask="99999-999" size="50" value="#{clienteBean.cliente.cep_cliente}"/>
+				<p:inputMask mask="99999-999" size="50" value="#{clienteBean.cliente.enderecoCliente.cep_endereco}"/>
 				<p:outputLabel value="Cidade"/>
-				<p:inputText size="50" value="#{clienteBean.cliente.cid_cliente}"/>
+				<p:inputText size="50" value="#{clienteBean.cliente.enderecoCliente.cidade_endereco}"/>
 				<p:outputLabel value="CPF"/>
-				<p:inputMask mask="999.999.999-99" size="50"/>
+				<p:inputMask mask="999.999.999-99" size="50" value="#{clienteBean.cliente.cpfCliente}"/>
 				<p:outputLabel value="E-mail"/>
-				<p:inputText size="50"/>
+				<p:inputText size="50" value="#{clienteBean.cliente.emailCliente}"/>
 				<p:outputLabel value="Telefone"/>
-				<p:inputMask mask="(99)99999-9999" size="50"/>
+				<p:inputMask mask="(99)99999-9999" size="50" value="#{clienteBean.cliente.telCliente}"/>
 			</h:panelGrid>
 			<div align="right">
 				<p:commandButton value="Salvar" id="btSalvar" actionListener="#{clienteBean.salvar}"/>

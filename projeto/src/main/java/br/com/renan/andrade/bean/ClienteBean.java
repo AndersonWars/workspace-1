@@ -28,7 +28,7 @@ public class ClienteBean implements Serializable{
 		ClienteDao dao = new ClienteDao();
 		try {
 			dao.merge(getCliente());
-			Messages.addGlobalInfo("Cliente "+getCliente().getNom_cliente()+" cadastrado com sucesso");
+			Messages.addGlobalInfo("Cliente "+getCliente().getNomeCliente()+" cadastrado com sucesso");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

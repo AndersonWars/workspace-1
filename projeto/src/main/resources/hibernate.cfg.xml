@@ -29,11 +29,11 @@
 		<property name="show_sql">true</property>
 
 		<!-- Cria as tabelas do banco de dados -->
-		<property name="hbm2ddl.auto">validate</property>
+		<property name="hbm2ddl.auto">create</property>
 		
 		<!-- Mapeamento das entidades -->
-		<mapping class="br.com.renan.andrade.domain.Cidade"/>
-		<mapping class="br.com.renan.andrade.domain.Estado"/>
+		<!-- <mapping class="br.com.renan.andrade.domain.Cidade"/>
+		<mapping class="br.com.renan.andrade.domain.Estado"/>  -->
 		<mapping class="br.com.renan.andrade.domain.Cliente"/>
 		<!-- <mapping class="br.com.renan.andrade.domain.Produto"/>
 		<mapping class="br.com.renan.andrade.domain.Venda"/>
