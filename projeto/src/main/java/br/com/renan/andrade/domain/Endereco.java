@@ -1,6 +1,7 @@
 package br.com.renan.andrade.domain;
 
 import java.io.*;
+import java.util.*;
 
 import javax.persistence.*;
 

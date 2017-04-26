@@ -19,11 +19,13 @@ public class ClienteBean implements Serializable{
 	
 	private Cliente cliente;
 	private List<Estado> estados;
+	private String confSenha;
 	
 	@PostConstruct
 	public void novo() {
 		cliente = new Cliente();
 		cliente.setEnderecoCliente(new Endereco());
+		confSenha = "";
 		try {
 			estados = new EstadoDao().listarTodos();
 		} catch (Exception e) {
@@ -33,10 +35,13 @@ public class ClienteBean implements Serializable{
 	}
 	
 	public void salvar() {
-		ClienteDao dao = new ClienteDao();
 		try {
-			dao.merge(getCliente());
-			Messages.addGlobalInfo("Cliente "+getCliente().getNomeCliente()+" cadastrado com sucesso");
+			ClienteDao dao = new ClienteDao();
+			if (validateSenha()) {
+				dao.merge(getCliente());
+				Messages.addGlobalInfo("Cliente "+getCliente().getNomeCliente()+" cadastrado com sucesso");
+				novo();
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -56,6 +61,22 @@ public class ClienteBean implements Serializable{
 
 	public void setEstados(List<Estado> estados) {
 		this.estados = estados;
+	}
+
+	public String getConfSenha() {
+		return confSenha;
+	}
+
+	public void setConfSenha(String confSenha) {
+		this.confSenha = confSenha;
+	}
+	
+	private Boolean validateSenha() {
+		if (!cliente.getSenha().equals(confSenha)) {
+			Messages.addGlobalError("Senha não confere. Tente novamente");
+			return false;
+		}
+		return true;
 	}
 	
 }

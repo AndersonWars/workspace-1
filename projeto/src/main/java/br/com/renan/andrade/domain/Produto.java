@@ -16,7 +16,10 @@ public class Produto implements Serializable{
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long cod_produto;
 	
-	@Column(length=100)
+	@Column(length=10)
+	private String nmProduto;
+	
+	@Column(length=1000)
 	private String des_produto;
 	
 	@Column
@@ -55,6 +58,14 @@ public class Produto implements Serializable{
 
 	public void setQtd_produto(Integer qtd_produto) {
 		this.qtd_produto = qtd_produto;
+	}
+
+	public String getNmProduto() {
+		return nmProduto;
+	}
+
+	public void setNmProduto(String nmProduto) {
+		this.nmProduto = nmProduto;
 	}
 	
 	

@@ -27,6 +27,12 @@ public class Cliente implements Serializable{
 	@JoinColumn(name="cdEndereco")
 	@ManyToOne(cascade=CascadeType.ALL)
 	private Endereco enderecoCliente;
+	
+	@Column(length=100)
+	private String login;
+	
+	@Column(length=10)
+	private String senha;
 
 	public Long getCodCliente() {
 		return codCliente;
@@ -105,5 +111,22 @@ public class Cliente implements Serializable{
 			return false;
 		return true;
 	}
+
+	public String getLogin() {
+		return login;
+	}
+
+	public void setLogin(String login) {
+		this.login = login;
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+	
 
 }

@@ -30,7 +30,7 @@ xmlns:f="http://xmlns.jcp.org/jsf/core">
 				<p:outputLabel value="CEP"/>
 				<p:inputMask mask="99999-999" size="50" value="#{clienteBean.cliente.enderecoCliente.cep_endereco}"/>
 				<p:outputLabel value="Estado"/>
-				<p:selectOneMenu converter="omnifaces.SelectItemsConverter">
+				<p:selectOneMenu converter="omnifaces.SelectItemsConverter" value="#{clienteBean.cliente.enderecoCliente.cod_uf}">
 					<f:selectItem itemLabel="Escolha uma UF" itemValue=""/>
 					<f:selectItems value="#{clienteBean.estados}" var="uf" itemLabel="#{uf.nome}" itemValue="#{uf}"/>
 				</p:selectOneMenu>
@@ -42,6 +42,12 @@ xmlns:f="http://xmlns.jcp.org/jsf/core">
 				<p:inputText size="50" value="#{clienteBean.cliente.enderecoCliente.rua_endereco}"/>
 				<p:outputLabel value="Número"/>
 				<p:inputText size="50" value="#{clienteBean.cliente.enderecoCliente.nu_logradouro}"/>
+				<p:outputLabel value="Login"/>
+				<p:inputText size="50" value="#{clienteBean.cliente.login}"/>
+				<p:outputLabel value="Senha"/>
+				<p:password size="50" value="#{clienteBean.cliente.senha}"/>
+				<p:outputLabel value="Confirme senha"/>
+				<p:password size="50" value="#{clienteBean.confSenha}"/>
 			</h:panelGrid>
 			<div align="right">
 				<p:commandButton value="Salvar" id="btSalvar" actionListener="#{clienteBean.salvar}" update=":msg :frmCad"/>
