@@ -21,6 +21,7 @@ public class UsuarioBean implements Serializable{
 	@PostConstruct
 	public void novo(){
 		usuario = new Usuario();
+		usuario.setTpUsuario('F');
 		confSenha = "";
 	}
 	

@@ -25,6 +25,8 @@ public class ClienteBean implements Serializable{
 	public void novo() {
 		cliente = new Cliente();
 		cliente.setEnderecoCliente(new Endereco());
+		cliente.setUser(new Usuario());
+		cliente.getUser().setTpUsuario('C');
 		confSenha = "";
 		try {
 			estados = new EstadoDao().listarTodos();
@@ -38,6 +40,7 @@ public class ClienteBean implements Serializable{
 		try {
 			ClienteDao dao = new ClienteDao();
 			if (validateSenha()) {
+				getCliente().getUser().setComprar(true);
 				dao.merge(getCliente());
 				Messages.addGlobalInfo("Cliente "+getCliente().getNomeCliente()+" cadastrado com sucesso");
 				novo();
@@ -72,7 +75,7 @@ public class ClienteBean implements Serializable{
 	}
 	
 	private Boolean validateSenha() {
-		if (!cliente.getSenha().equals(confSenha)) {
+		if (!cliente.getUser().getDsSenha().equals(confSenha)) {
 			Messages.addGlobalError("Senha não confere. Tente novamente");
 			return false;
 		}

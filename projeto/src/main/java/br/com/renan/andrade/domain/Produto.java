@@ -14,50 +14,50 @@ public class Produto implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Long cod_produto;
+	private Long codProduto;
 	
 	@Column(length=10)
 	private String nmProduto;
 	
 	@Column(length=1000)
-	private String des_produto;
+	private String desProduto;
 	
 	@Column
-	private Double vlr_produto;
+	private Double vlrProduto;
 	
 	@Column
-	private Integer qtd_produto;
+	private Integer qtdProduto;
 
 	public Long getCod_produto() {
-		return cod_produto;
+		return codProduto;
 	}
 
-	public void setCod_produto(Long cod_produto) {
-		this.cod_produto = cod_produto;
+	public void setCodProduto(Long codProduto) {
+		this.codProduto = codProduto;
 	}
 
-	public String getDes_produto() {
-		return des_produto;
+	public String getDesProduto() {
+		return desProduto;
 	}
 
-	public void setDes_produto(String des_produto) {
-		this.des_produto = des_produto;
+	public void setDesProduto(String desProduto) {
+		this.desProduto = desProduto;
 	}
 
-	public Double getVlr_produto() {
-		return vlr_produto;
+	public Double getVlrProduto() {
+		return vlrProduto;
 	}
 
-	public void setVlr_produto(Double vlr_produto) {
-		this.vlr_produto = vlr_produto;
+	public void setVlrProduto(Double vlrProduto) {
+		this.vlrProduto = vlrProduto;
 	}
 
-	public Integer getQtd_produto() {
-		return qtd_produto;
+	public Integer getQtdProduto() {
+		return qtdProduto;
 	}
 
-	public void setQtd_produto(Integer qtd_produto) {
-		this.qtd_produto = qtd_produto;
+	public void setQtdProduto(Integer qtdProduto) {
+		this.qtdProduto = qtdProduto;
 	}
 
 	public String getNmProduto() {
@@ -68,6 +68,4 @@ public class Produto implements Serializable{
 		this.nmProduto = nmProduto;
 	}
 	
-	
-
 }

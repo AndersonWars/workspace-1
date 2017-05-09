@@ -3,9 +3,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 xmlns:h="http://xmlns.jcp.org/jsf/html"
 xmlns:p="http://primefaces.org/ui"
+xmlns:pe="http://primefaces.org/ui/extensions"
 xmlns:f="http://xmlns.jcp.org/jsf/core">
 <h:head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<h:outputStylesheet name="css/style.css"/>
 <title>Cadastro de clientes</title>
 </h:head>
 <h:body>
@@ -28,24 +30,24 @@ xmlns:f="http://xmlns.jcp.org/jsf/core">
 				<p:outputLabel value="Telefone"/>
 				<p:inputMask mask="(99)99999-9999" size="50" value="#{clienteBean.cliente.telCliente}"/>
 				<p:outputLabel value="CEP"/>
-				<p:inputMask mask="99999-999" size="50" value="#{clienteBean.cliente.enderecoCliente.cep_endereco}"/>
+				<p:inputMask mask="99999-999" size="50" value="#{clienteBean.cliente.enderecoCliente.cepEndereco}"/>
 				<p:outputLabel value="Estado"/>
-				<p:selectOneMenu converter="omnifaces.SelectItemsConverter" value="#{clienteBean.cliente.enderecoCliente.cod_uf}">
+				<p:selectOneMenu converter="omnifaces.SelectItemsConverter" value="#{clienteBean.cliente.enderecoCliente.cdUf}" styleClass="combo">
 					<f:selectItem itemLabel="Escolha uma UF" itemValue=""/>
 					<f:selectItems value="#{clienteBean.estados}" var="uf" itemLabel="#{uf.nome}" itemValue="#{uf}"/>
 				</p:selectOneMenu>
 				<p:outputLabel value="Cidade"/>
-				<p:inputText size="50" value="#{clienteBean.cliente.enderecoCliente.cidade_endereco}"/>
+				<p:inputText size="50" value="#{clienteBean.cliente.enderecoCliente.cidEndereco}"/>
 				<p:outputLabel value="Bairro"/>
-				<p:inputText size="50" value="#{clienteBean.cliente.enderecoCliente.bairro_endereco}"/>
+				<p:inputText size="50" value="#{clienteBean.cliente.enderecoCliente.bairroEndereco}"/>
 				<p:outputLabel value="Rua"/>
-				<p:inputText size="50" value="#{clienteBean.cliente.enderecoCliente.rua_endereco}"/>
+				<p:inputText size="50" value="#{clienteBean.cliente.enderecoCliente.ruaEndereco}"/>
 				<p:outputLabel value="Número"/>
-				<p:inputText size="50" value="#{clienteBean.cliente.enderecoCliente.nu_logradouro}"/>
+				<pe:inputNumber decimalPlaces="0" value="#{clienteBean.cliente.enderecoCliente.nuLogradouro}"/>
 				<p:outputLabel value="Login"/>
-				<p:inputText size="50" value="#{clienteBean.cliente.login}"/>
+				<p:inputText size="50" value="#{clienteBean.cliente.user.dsLogin}"/>
 				<p:outputLabel value="Senha"/>
-				<p:password size="50" value="#{clienteBean.cliente.senha}"/>
+				<p:password size="50" value="#{clienteBean.cliente.user.dsSenha}"/>
 				<p:outputLabel value="Confirme senha"/>
 				<p:password size="50" value="#{clienteBean.confSenha}"/>
 			</h:panelGrid>

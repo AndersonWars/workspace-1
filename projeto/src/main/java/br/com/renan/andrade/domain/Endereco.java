@@ -11,93 +11,93 @@ public class Endereco implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Long cod_endereco;
+	private Long cdEndereco;
 	
 	@Column(length=100)
-	private String rua_endereco;
+	private String ruaEndereco;
 	
 	@Column(length=100)
-	private String cidade_endereco;
+	private String cidEndereco;
 	
 	@JoinColumn
 	@ManyToOne(cascade=CascadeType.ALL)
-	private Estado cod_uf;
+	private Estado cdUf;
 	
 	@Column(length=10)
-	private String cep_endereco;
+	private String cepEndereco;
 	
 	@Column(length=10)
-	private Integer nu_logradouro;
+	private Integer nuLogradouro;
 	
 	@Column(length=100)
-	private String bairro_endereco;
+	private String bairroEndereco;
 
-	public Long getCod_endereco() {
-		return cod_endereco;
+	public Long getCdEndereco() {
+		return cdEndereco;
 	}
 
-	public void setCod_endereco(Long cod_endereco) {
-		this.cod_endereco = cod_endereco;
+	public void setCdEndereco(Long cdEndereco) {
+		this.cdEndereco = cdEndereco;
 	}
 
-	public String getRua_endereco() {
-		return rua_endereco;
+	public String getRuaEndereco() {
+		return ruaEndereco;
 	}
 
-	public void setRua_endereco(String rua_endereco) {
-		this.rua_endereco = rua_endereco;
+	public void setRuaEndereco(String ruaEndereco) {
+		this.ruaEndereco = ruaEndereco;
 	}
 
-	public String getCidade_endereco() {
-		return cidade_endereco;
+	public String getCidEndereco() {
+		return cidEndereco;
 	}
 
-	public void setCidade_endereco(String cidade_endereco) {
-		this.cidade_endereco = cidade_endereco;
+	public void setCidEndereco(String cidEndereco) {
+		this.cidEndereco = cidEndereco;
 	}
 
-	public Estado getCod_uf() {
-		return cod_uf;
+	public Estado getCdUf() {
+		return cdUf;
 	}
 
-	public void setCod_uf(Estado cod_uf) {
-		this.cod_uf = cod_uf;
+	public void setCdUf(Estado cdUf) {
+		this.cdUf = cdUf;
 	}
 
-	public String getCep_endereco() {
-		return cep_endereco;
+	public String getCepEndereco() {
+		return cepEndereco;
 	}
 
-	public void setCep_endereco(String cep_endereco) {
-		this.cep_endereco = cep_endereco;
+	public void setCepEndereco(String cepEndereco) {
+		this.cepEndereco = cepEndereco;
 	}
 
-	public Integer getNu_logradouro() {
-		return nu_logradouro;
+	public Integer getNuLogradouro() {
+		return nuLogradouro;
 	}
 
-	public void setNu_logradouro(Integer nu_logradouro) {
-		this.nu_logradouro = nu_logradouro;
+	public void setNuLogradouro(Integer nuLogradouro) {
+		this.nuLogradouro = nuLogradouro;
 	}
 
-	public String getBairro_endereco() {
-		return bairro_endereco;
+	public String getBairroEndereco() {
+		return bairroEndereco;
 	}
 
-	public void setBairro_endereco(String bairro_endereco) {
-		this.bairro_endereco = bairro_endereco;
+	public void setBairroEndereco(String bairroEndereco) {
+		this.bairroEndereco = bairroEndereco;
 	}
 	
 	@Override
 	public String toString() {
-		return "Endereco[cod_Endereco" + getCod_endereco() + "]";
+		return "Endereco[cdEndereco" + getCdEndereco() + "]";
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((cod_endereco == null) ? 0 : cod_endereco.hashCode());
+		result = prime * result + ((cdEndereco == null) ? 0 : cdEndereco.hashCode());
 		return result;
 	}
 
@@ -110,10 +110,10 @@ public class Endereco implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Endereco other = (Endereco) obj;
-		if (cod_endereco == null) {
-			if (other.cod_endereco != null)
+		if (cdEndereco == null) {
+			if (other.cdEndereco != null)
 				return false;
-		} else if (!cod_endereco.equals(other.cod_endereco))
+		} else if (!cdEndereco.equals(other.cdEndereco))
 			return false;
 		return true;
 	}

@@ -12,7 +12,7 @@ public class Cliente implements Serializable{
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long codCliente;
 	
-	@Column(length=100, name="nmCliente")
+	@Column(length=100)
 	private String nomeCliente;
 	
 	@Column(length=15)
@@ -28,11 +28,9 @@ public class Cliente implements Serializable{
 	@ManyToOne(cascade=CascadeType.ALL)
 	private Endereco enderecoCliente;
 	
-	@Column(length=100)
-	private String login;
-	
-	@Column(length=10)
-	private String senha;
+	@JoinColumn
+	@OneToOne(cascade=CascadeType.ALL)
+	private Usuario user;
 
 	public Long getCodCliente() {
 		return codCliente;
@@ -82,6 +80,14 @@ public class Cliente implements Serializable{
 		this.enderecoCliente = enderecoCliente;
 	}
 	
+	public Usuario getUser() {
+		return user;
+	}
+
+	public void setUser(Usuario user) {
+		this.user = user;
+	}
+
 	@Override
 	public String toString() {
 		return "Cliente[codCliente" + getCodCliente() + "]";
@@ -111,22 +117,5 @@ public class Cliente implements Serializable{
 			return false;
 		return true;
 	}
-
-	public String getLogin() {
-		return login;
-	}
-
-	public void setLogin(String login) {
-		this.login = login;
-	}
-
-	public String getSenha() {
-		return senha;
-	}
-
-	public void setSenha(String senha) {
-		this.senha = senha;
-	}
 	
-
 }
