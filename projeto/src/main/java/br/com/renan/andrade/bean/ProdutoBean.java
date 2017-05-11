@@ -1,6 +1,7 @@
 package br.com.renan.andrade.bean;
 
 import java.io.*;
+import java.nio.file.*;
 import java.util.*;
 
 import javax.annotation.*;
@@ -8,6 +9,8 @@ import javax.faces.bean.*;
 import javax.faces.event.*;
 
 import org.omnifaces.util.*;
+import org.primefaces.event.*;
+import org.primefaces.model.*;
 
 import br.com.renan.andrade.dao.*;
 import br.com.renan.andrade.domain.*;
@@ -17,8 +20,8 @@ import br.com.renan.andrade.domain.*;
 @ViewScoped
 public class ProdutoBean implements Serializable{
 	
-	public Produto produto;
-	public List<Produto> produtos;
+	private Produto produto;
+	private List<Produto> produtos;
 	
 	@PostConstruct
 	public void novo() {
@@ -29,7 +32,12 @@ public class ProdutoBean implements Serializable{
 	public void salvar() {
 		try {
 			ProdutoDao dao = new ProdutoDao();
-			dao.merge(produto);
+			Produto produtoN =  dao.merge(produto);
+			
+			Path origem = Paths.get(produto.getCaminhoUpload());
+			Path destino = Paths.get("C:/Users/Renan/workspace/workspace/uploads/"+produtoN.getCodProduto()+".png");
+			Files.copy(origem, destino, StandardCopyOption.REPLACE_EXISTING);
+			
 			Messages.addGlobalInfo("Produto " + produto.getNmProduto() + " foi cadastrado");
 			listar();
 			novo();
@@ -44,6 +52,8 @@ public class ProdutoBean implements Serializable{
 		produto = (Produto)event.getComponent().getAttributes().get("prodExcluir");
 		ProdutoDao dao = new ProdutoDao();
 		dao.excluir(produto);
+		Path caminho = Paths.get("C:/Users/Renan/workspace/workspace/uploads"+produto.getCodProduto()+".png");
+		Files.deleteIfExists(caminho);
 		listar();
 		Messages.addGlobalInfo(produto.getNmProduto()+" - Excluido com sucesso");
 		} catch (Exception e) {
@@ -53,6 +63,7 @@ public class ProdutoBean implements Serializable{
 	
 	public void alterar(ActionEvent event) {
 		produto = (Produto)event.getComponent().getAttributes().get("prodAlterar");
+		produto.setCaminhoUpload("C:/Users/Renan/workspace/workspace/uploads"+produto.getCodProduto()+".png");
 	}
 	
 	public void listar() {
@@ -60,6 +71,17 @@ public class ProdutoBean implements Serializable{
 			ProdutoDao dao = new ProdutoDao();
 			produtos = dao.listarTodos();
 		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void upload(FileUploadEvent evento) {
+		try {
+			UploadedFile x = evento.getFile();
+			Path t = Files.createTempFile(null, null);
+			Files.copy(x.getInputstream(), t, StandardCopyOption.REPLACE_EXISTING);
+			produto.setCaminhoUpload(t.toString());
+		}catch (Exception e) {
 			e.printStackTrace();
 		}
 	}

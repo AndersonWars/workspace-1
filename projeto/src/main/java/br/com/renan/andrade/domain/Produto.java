@@ -2,11 +2,7 @@ package br.com.renan.andrade.domain;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @SuppressWarnings("serial")
 @Entity
@@ -27,8 +23,11 @@ public class Produto implements Serializable{
 	
 	@Column
 	private Integer qtdProduto;
+	
+	@Transient
+	private String caminhoUpload;
 
-	public Long getCod_produto() {
+	public Long getCodProduto() {
 		return codProduto;
 	}
 
@@ -66,6 +65,14 @@ public class Produto implements Serializable{
 
 	public void setNmProduto(String nmProduto) {
 		this.nmProduto = nmProduto;
+	}
+
+	public String getCaminhoUpload() {
+		return caminhoUpload;
+	}
+
+	public void setCaminhoUpload(String caminhoUpload) {
+		this.caminhoUpload = caminhoUpload;
 	}
 	
 }

@@ -31,6 +31,7 @@ xmlns:f="http://xmlns.jcp.org/jsf/core">
 					</p:commandButton>
 					<p:commandButton icon="ui-icon-pencil" oncomplete="PF('dlg').show();" actionListener="#{cidadeBean.alterar}" update=":frmCad:telaCad :msg">
 						<f:attribute name="cidadeAlterar" value="#{cid}"/>
+						<f:actionListener type="org.omnifaces.eventlistener.ResetInputAjaxActionListener"/>
 					</p:commandButton>
 				</p:column>	
 			</p:dataTable>

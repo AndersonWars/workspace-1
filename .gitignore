@@ -58,3 +58,5 @@ local.properties
 
 #Tomcat server
 Servers/
+
+uploads/
