@@ -30,6 +30,7 @@
 	</plugins>
 </build>
 
+
 <!--  DEPENDÊNCIAS -->
 	<dependencies>
 		<!-- HIBERNATE -->
@@ -68,6 +69,13 @@
 		    <artifactId>omnifaces</artifactId>
 		    <version>1.11</version>
 		</dependency>
+		<!-- JSON -->
+		<dependency>
+		    <groupId>org.json</groupId>
+		    <artifactId>json</artifactId>
+		    <version>20160810</version>
+		</dependency>
+		
 	
 	</dependencies>
 </project>

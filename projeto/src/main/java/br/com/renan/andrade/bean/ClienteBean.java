@@ -11,6 +11,7 @@ import org.omnifaces.util.*;
 
 import br.com.renan.andrade.dao.*;
 import br.com.renan.andrade.domain.*;
+import br.com.renan.andrade.util.*;
 
 @SuppressWarnings("serial")
 @ManagedBean
@@ -34,6 +35,10 @@ public class ClienteBean implements Serializable{
 			Messages.addGlobalError("Erro ao carregar UFs");
 			e.printStackTrace();
 		}
+	}
+	
+	public void setEnderecoByCep() {
+		cliente.setEnderecoCliente(EnderecoUtil.preencheEnderecoJSON(cliente.getEnderecoCliente().getCepEndereco()));
 	}
 	
 	public void salvar() {

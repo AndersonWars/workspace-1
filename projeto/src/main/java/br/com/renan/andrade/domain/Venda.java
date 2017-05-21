@@ -3,13 +3,7 @@ package br.com.renan.andrade.domain;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 
 @SuppressWarnings("serial")
 @Entity
@@ -19,8 +13,9 @@ public class Venda implements Serializable{
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long cod_venda;
 	
-	@OneToMany
+	
 	@JoinColumn
+	@ManyToOne(cascade=CascadeType.ALL)
 	private Cliente cod_cliente;
 	
 	@Column

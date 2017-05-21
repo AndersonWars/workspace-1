@@ -22,6 +22,9 @@ xmlns:f="http://xmlns.jcp.org/jsf/core">
 	<p:growl id="msg"/>
 	<h:form id="frmCad" enctype="multipart/form-data">
 		<p:panel header="Produtos">
+		<table>
+		<tr>
+		<td>
 			<h:panelGrid columns="2">
 				<p:outputLabel value="Nome produto"/>
 				<p:inputText size="50" value="#{produtoBean.produto.nmProduto}"/>
@@ -32,8 +35,16 @@ xmlns:f="http://xmlns.jcp.org/jsf/core">
 				<p:outputLabel value="Estoque"/>
 				<pe:inputNumber decimalPlaces="0" value="#{produtoBean.produto.qtdProduto}"/>
 				<p:outputLabel value="Foto produto"/>
-				<p:fileUpload auto="true" id="fileUp" mode="advanced" fileUploadListener="#{produtoBean.upload}"/>
+				<p:fileUpload auto="true" id="fileUp" mode="advanced" fileUploadListener="#{produtoBean.upload}" update=":frmCad:img"/>
 			</h:panelGrid>
+			</td>
+			<td>
+				<p:graphicImage value="#{imageBean.img}" width="250" id="img">
+					<f:param name="parCodigo" value="#{produtoBean.produto.codProduto}"/>
+				</p:graphicImage>
+			</td>
+			</tr>
+			</table>
 			<div align="right">
 					<p:commandButton value="Salvar" id="btSalvar" actionListener="#{produtoBean.salvar}" update=":frmCad :msg :frmTab:table"/>
 					<p:commandButton value="Cancelar" id="btCancelar" actionListener="#{produtoBean.novo}" update=":frmCad :msg"/>

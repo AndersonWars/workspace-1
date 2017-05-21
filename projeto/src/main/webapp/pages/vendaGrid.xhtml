@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:h="http://xmlns.jcp.org/jsf/html"
+xmlns:p="http://primefaces.org/ui"
+xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Venda</title>
+</h:head>
+<h:body>
+	<p:menubar>
+		<p:submenu label="Clientes"></p:submenu>
+		<p:submenu label="Venda"></p:submenu>
+		<p:submenu label="Produtos"></p:submenu>
+	</p:menubar>
+	
+	<p:growl id="msg"/>
+	<h:form>
+			<p:dataGrid var="prod" value="#{vendaBean.listProd}" columns="3" layout="grid">
+			<f:facet name="header">Lista de Produtos</f:facet>
+			<p:panel header="#{prod.nmProduto}">
+				<p:graphicImage value="#{imageBean.img}">
+					<f:param name="parCodigo" value="#{prod.codProduto}"/>
+				</p:graphicImage>
+				<p:commandButton oncomplete="PF('produtoDlg').show" title="Adicionar ao carrinho" icon="ui-icon-plusthick">
+					<f:setPropertyActionListener value="prod" target="#{vendaBean.produtoSelecionado}"/>
+				</p:commandButton>
+				<p:commandButton oncomplete="PF('detalhesDlg').show" title="Detalhes produto" icon="ui-icon-search">
+				<f:setPropertyActionListener value="prod" target="#{vendaBean.produtoSelecionado}"/>
+				</p:commandButton>
+			</p:panel>
+			</p:dataGrid>
+
+		<p:dialog modal="true" resizable="false" showEffect="fade"
+			hideEffect="fade" widgetVar="detalhesDlg">
+			<p:panel header="Detalhes">
+				<p:graphicImage value="#{imageBean.img}">
+					<f:param name="parCodigo"
+						value="#{vendaBean.produtoSelecionado.codProduto}" />
+				</p:graphicImage>
+				<p:outputLabel value="#{vendaBean.produtoSelecionado.nmProduto}" />
+				<h:outputText value="#{vendaBean.produtoSelecionado.desProduto}" />
+			</p:panel>
+		</p:dialog>
+
+		<p:dialog modal="true" resizable="false" showEffect="fade" hideEffect="fade" widgetVar="produtoDlg">
+		<p:panel header="Item">
+			<p:outputLabel value="#{vendaBean.produtoSelecionado.nmProduto}"/>
+			<p:graphicImage value="#{imageBean.img}">
+					<f:param name="parCodigo" value="#{vendaBean.produtoSelecionado.codProduto}"/>
+			</p:graphicImage>
+			<p:spinner min="0" max="#{vendaBean.produtoSelecionado.qtdProduto}" value="#{vendaBean.qtdItens}"/>
+			<p:commandButton value="Adicionar" actionListener="#{vendaBean.insereItemVenda}"/>
+			<p:commandButton value="Cancelar"/>
+		</p:panel>
+	</p:dialog>
+	
+	</h:form>
+	
+
+	
+	
+
+</h:body>
+</html>

@@ -26,6 +26,9 @@ public class Produto implements Serializable{
 	
 	@Transient
 	private String caminhoUpload;
+	
+	@Transient
+	private boolean isUploading;
 
 	public Long getCodProduto() {
 		return codProduto;
@@ -73,6 +76,14 @@ public class Produto implements Serializable{
 
 	public void setCaminhoUpload(String caminhoUpload) {
 		this.caminhoUpload = caminhoUpload;
+	}
+
+	public boolean isUploading() {
+		return isUploading;
+	}
+
+	public void setUploading(boolean isUploading) {
+		this.isUploading = isUploading;
 	}
 	
 }

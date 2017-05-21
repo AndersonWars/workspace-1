@@ -30,7 +30,10 @@ xmlns:f="http://xmlns.jcp.org/jsf/core">
 				<p:outputLabel value="Telefone"/>
 				<p:inputMask mask="(99)99999-9999" size="50" value="#{clienteBean.cliente.telCliente}"/>
 				<p:outputLabel value="CEP"/>
-				<p:inputMask mask="99999-999" size="50" value="#{clienteBean.cliente.enderecoCliente.cepEndereco}"/>
+				<p:inputMask mask="99999-999" size="50" value="#{clienteBean.cliente.enderecoCliente.cepEndereco}" validatorMessage="Informe um CEP válido">
+					<f:validateLength minimum="9" maximum="9"/>
+					<p:ajax event="blur" update=":frmCad" listener="#{clienteBean.setEnderecoByCep}"/>
+				</p:inputMask>
 				<p:outputLabel value="Estado"/>
 				<p:selectOneMenu converter="omnifaces.SelectItemsConverter" value="#{clienteBean.cliente.enderecoCliente.cdUf}" styleClass="combo">
 					<f:selectItem itemLabel="Escolha uma UF" itemValue=""/>
