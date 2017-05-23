@@ -6,6 +6,7 @@ xmlns:p="http://primefaces.org/ui"
 xmlns:f="http://xmlns.jcp.org/jsf/core">
 <h:head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<h:outputStylesheet name="css/style.css"/>
 <title>Venda</title>
 </h:head>
 <h:body>
@@ -16,51 +17,78 @@ xmlns:f="http://xmlns.jcp.org/jsf/core">
 	</p:menubar>
 	
 	<p:growl id="msg"/>
-	<h:form>
+	<h:form id="frmGrid">
 			<p:dataGrid var="prod" value="#{vendaBean.listProd}" columns="3" layout="grid">
 			<f:facet name="header">Lista de Produtos</f:facet>
-			<p:panel header="#{prod.nmProduto}">
-				<p:graphicImage value="#{imageBean.img}">
+			<p:panel header="#{prod.nmProduto}" style="width: 80%;">
+			<table>
+			<tr>
+			<td>
+				<p:graphicImage value="#{imageBean.img}" width="150">
 					<f:param name="parCodigo" value="#{prod.codProduto}"/>
 				</p:graphicImage>
-				<p:commandButton oncomplete="PF('produtoDlg').show" title="Adicionar ao carrinho" icon="ui-icon-plusthick">
-					<f:setPropertyActionListener value="prod" target="#{vendaBean.produtoSelecionado}"/>
+			</td>
+			<td>
+				<h:outputLabel value="Preço:" styleClass="labelPreco"/><br/>
+				<h:outputLabel value="#{prod.vlrProduto}" styleClass="labelVlr"/>
+			</td>
+			</tr>
+			<tr>
+			<td>
+				<p:commandButton oncomplete="PF('produtoDlg').show()" title="Adicionar ao carrinho" icon="ui-icon-plusthick" update=":frmDlgAdc">
+					<f:setPropertyActionListener value="#{prod}" target="#{vendaBean.produtoSelecionado}"/>
 				</p:commandButton>
-				<p:commandButton oncomplete="PF('detalhesDlg').show" title="Detalhes produto" icon="ui-icon-search">
-				<f:setPropertyActionListener value="prod" target="#{vendaBean.produtoSelecionado}"/>
+				<p:commandButton oncomplete="PF('detalhesDlg').show()" title="Detalhes produto" icon="ui-icon-search" update=":frmDlgDetalhes">
+				<f:setPropertyActionListener value="#{prod}" target="#{vendaBean.produtoSelecionado}"/>
 				</p:commandButton>
+			</td>
+			</tr>
+			</table>
 			</p:panel>
 			</p:dataGrid>
-
-		<p:dialog modal="true" resizable="false" showEffect="fade"
-			hideEffect="fade" widgetVar="detalhesDlg">
-			<p:panel header="Detalhes">
-				<p:graphicImage value="#{imageBean.img}">
-					<f:param name="parCodigo"
-						value="#{vendaBean.produtoSelecionado.codProduto}" />
-				</p:graphicImage>
-				<p:outputLabel value="#{vendaBean.produtoSelecionado.nmProduto}" />
-				<h:outputText value="#{vendaBean.produtoSelecionado.desProduto}" />
-			</p:panel>
+	</h:form>
+	
+		<p:dialog header="#{vendaBean.produtoSelecionado.nmProduto}" modal="true" resizable="false" showEffect="fade" hideEffect="fade" widgetVar="detalhesDlg" draggable="false">
+			<h:form id="frmDlgDetalhes">
+				<table>
+				<tr><td>
+					<p:graphicImage value="#{imageBean.img}" width="150">
+						<f:param name="parCodigo" value="#{vendaBean.produtoSelecionado.codProduto}" />
+					</p:graphicImage>
+				</td></tr>
+				<tr><td align="center">
+					<h:outputText value="#{vendaBean.produtoSelecionado.desProduto}" styleClass="labelInfos"/>
+				</td></tr>	
+				</table>
+			</h:form>
 		</p:dialog>
 
 		<p:dialog modal="true" resizable="false" showEffect="fade" hideEffect="fade" widgetVar="produtoDlg">
+		<h:form id="frmDlgAdc">
 		<p:panel header="Item">
 			<p:outputLabel value="#{vendaBean.produtoSelecionado.nmProduto}"/>
-			<p:graphicImage value="#{imageBean.img}">
+			<p:graphicImage value="#{imageBean.img}" width="150">
 					<f:param name="parCodigo" value="#{vendaBean.produtoSelecionado.codProduto}"/>
 			</p:graphicImage>
 			<p:spinner min="0" max="#{vendaBean.produtoSelecionado.qtdProduto}" value="#{vendaBean.qtdItens}"/>
 			<p:commandButton value="Adicionar" actionListener="#{vendaBean.insereItemVenda}"/>
-			<p:commandButton value="Cancelar"/>
+			<p:commandButton value="Cancelar" oncomplete="PF('produtoDlg')hide()"/>
 		</p:panel>
+		</h:form>
 	</p:dialog>
 	
-	</h:form>
+	<p:dialog header="Login" resizable="false" draggable="false" showEffect="fade" hideEffect="fade" widgetVar="loginDialog">
+		<h:form>
+		<h:panelGrid>
+			<p:outputLabel value="Usuário:"/>
+			<p:inputText value="#{vendaBean.usuario.dsLogin}"/>
+			<p:outputLabel value="Senha:"/>
+			<p:password value="#{vendaBean.usuario.dsSenha}"/>
+			<p:commandButton value="Entrar" actionListener="#{vendaBean.fazLogin}" update=":msg"/>
+			<p:commandButton value="Cancelar" oncomplete="PF('loginDialog').hide()"/>
+		</h:panelGrid>
+		</h:form>
+	</p:dialog>
 	
-
-	
-	
-
 </h:body>
 </html>

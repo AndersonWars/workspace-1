@@ -7,3 +7,17 @@
 .inputNums {
 	width: 100% !important;
 }
+
+.labelPreco {
+	color: red;
+	font-size: 20pt;
+}
+
+.labelVlr {
+	color: red;
+	font-size: 17pt;
+}
+
+.labelInfos {
+	font-size: 14pt;
+}
