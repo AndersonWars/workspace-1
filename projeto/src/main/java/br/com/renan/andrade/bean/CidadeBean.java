@@ -95,6 +95,6 @@ public class CidadeBean implements Serializable{
 	public void setEstados(List<Estado> estados) {
 		this.estados = estados;
 	}
-	
+	//teste
 	
 }
