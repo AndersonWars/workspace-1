@@ -21,3 +21,10 @@
 .labelInfos {
 	font-size: 14pt;
 }
+
+.loginForm {
+	display: table-cell;
+	vertical-align: middle;
+	margin-left: auto;
+	margin-right: auto;
+}

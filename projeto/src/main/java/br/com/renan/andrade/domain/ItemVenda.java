@@ -16,9 +16,9 @@ import javax.persistence.OneToMany;
 public class ItemVenda implements Serializable{
 	
 	@Id
-	private Long seqItem;
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private Integer seqItem;
 	
-	@Id
 	@ManyToOne
 	@JoinColumn
 	private Venda codVenda;
@@ -34,11 +34,11 @@ public class ItemVenda implements Serializable{
 	@Column
 	private Integer qtdItem;
 
-	public Long getSeqItem() {
+	public Integer getSeqItem() {
 		return seqItem;
 	}
 
-	public void setSeqItem(Long seqItem) {
+	public void setSeqItem(Integer seqItem) {
 		this.seqItem = seqItem;
 	}
 

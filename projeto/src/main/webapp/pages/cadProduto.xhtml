@@ -39,7 +39,7 @@ xmlns:f="http://xmlns.jcp.org/jsf/core">
 			</h:panelGrid>
 			</td>
 			<td>
-				<p:graphicImage value="#{imageBean.img}" width="250" id="img">
+				<p:graphicImage value="#{imageBean.img}" width="250" id="img" cache="false">
 					<f:param name="parCodigo" value="#{produtoBean.produto.codProduto}"/>
 				</p:graphicImage>
 			</td>
