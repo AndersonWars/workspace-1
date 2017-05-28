@@ -22,9 +22,13 @@
 	font-size: 14pt;
 }
 
+#login {
+  position: relative;
+  top: 50%;
+  transform: translateY(260%);
+}
+
 .loginForm {
-	display: table-cell;
-	vertical-align: middle;
-	margin-left: auto;
-	margin-right: auto;
+	border: medium;
+    border-bottom-color: black;
 }

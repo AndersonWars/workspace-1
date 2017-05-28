@@ -10,11 +10,13 @@ xmlns:f="http://xmlns.jcp.org/jsf/core">
 <title>Venda</title>
 </h:head>
 <h:body>
+	<h:form id="formMenu">
 	<p:menubar>
-		<p:submenu label="Clientes"></p:submenu>
-		<p:submenu label="Venda"></p:submenu>
-		<p:submenu label="Produtos"></p:submenu>
+		<p:menuitem value="Clientes" title="Clientes" url="cadCliente.xhtml"/>
+		<p:menuitem value="Venda" title="Venda" url="login.xhtml"/>
+		<p:menuitem value="Produtos" title="Produtos" url="cadProduto.xhtml"/>
 	</p:menubar>
+	</h:form>
 	
 	<p:growl id="msg"/>
 	<h:form id="frmGrid">
@@ -37,7 +39,7 @@ xmlns:f="http://xmlns.jcp.org/jsf/core">
 			</tr>
 			<tr>
 			<td>
-				<p:commandButton oncomplete="PF('produtoDlg').show()" title="Adicionar ao carrinho" icon="ui-icon-plusthick" update=":frmDlgAdc">
+				<p:commandButton oncomplete="PF('produtoDlg').show()" title="Adicionar ao carrinho" icon="fa fa-fw fa-cart-plus" update=":frmDlgAdc">
 					<f:setPropertyActionListener value="#{prod}" target="#{vendaBean.produtoSelecionado}"/>
 				</p:commandButton>
 				<p:commandButton oncomplete="PF('detalhesDlg').show()" title="Detalhes produto" icon="ui-icon-search" update=":frmDlgDetalhes">

@@ -12,7 +12,11 @@ xmlns:f="http://xmlns.jcp.org/jsf/core">
 <h:body>
 
 <p:growl id="msg"/>
+	<div id="login" align="center">
 	<h:form>
+	<table border="2">
+	<tr>
+	<td>
 	<h:panelGrid columns="2" styleClass="loginForm">
 			<p:outputLabel value="Usuário:"/>
 			<p:inputText value="#{loginBean.usuario.dsLogin}"/>
@@ -21,7 +25,11 @@ xmlns:f="http://xmlns.jcp.org/jsf/core">
 			<p:commandButton value="Entrar" action="#{loginBean.fazLogin}" update=":msg"/>
 			<p:commandButton value="Cancelar"/>
 	</h:panelGrid>
+	</td>
+	</tr>
+	</table>
 	</h:form>
+	</div>
 
 </h:body>
 </html>

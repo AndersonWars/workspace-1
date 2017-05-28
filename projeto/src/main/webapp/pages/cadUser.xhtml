@@ -9,11 +9,13 @@ xmlns:f="http://xmlns.jcp.org/jsf/core">
 <title>Novo usuário</title>
 </h:head>
 <h:body>
+	<h:form id="formMenu">
 	<p:menubar>
-		<p:submenu label="Clientes"></p:submenu>
-		<p:submenu label="Venda"></p:submenu>
-		<p:submenu label="Produtos"></p:submenu>
+		<p:menuitem value="Clientes" title="Clientes" url="cadCliente.xhtml"/>
+		<p:menuitem value="Venda" title="Venda" url="login.xhtml"/>
+		<p:menuitem value="Produtos" title="Produtos" url="cadProduto.xhtml"/>
 	</p:menubar>
+	</h:form>
 	
 	<p:growl id="msg"/>
 	<h:form id="frmCad">
