@@ -21,23 +21,24 @@ public class ImageBean {
             return new DefaultStreamedContent();
         }else {
             String imageId = context.getExternalContext().getRequestParameterMap().get("parCodigo");
-            File f = new File("C:/Users/Renan/workspace/workspace/uploads/"+imageId+".png");
-			if(f.isFile()){
-				Path path = Paths.get(f.getAbsolutePath());
-				InputStream stream = Files.newInputStream(path);
-				img = new DefaultStreamedContent(stream);
-			}else{
-				f = new File("C:/Users/Renan/workspace/workspace/uploads/temp.png");
-				if (f.isFile()) {
-					Path path = Paths.get(f.getAbsolutePath());
-					InputStream stream = Files.newInputStream(path);
-					img = new DefaultStreamedContent(stream);
-				} else {
-					Path path = Paths.get("C:/Users/Renan/workspace/workspace/uploads/branco.png");
-					InputStream stream = Files.newInputStream(path);
-					img = new DefaultStreamedContent(stream);
-				}
-			}
+            File f = new File("C:/Users/Renan/workspace/workspace/uploads/temp.png");
+            if (f.isFile()) {
+            	Path path = Paths.get(f.getAbsolutePath());
+            	InputStream stream = Files.newInputStream(path);
+            	img = new DefaultStreamedContent(stream);
+            } else {
+            	f = new File("C:/Users/Renan/workspace/workspace/uploads/"+imageId+".png");
+            	if(f.isFile()){
+            		Path path = Paths.get(f.getAbsolutePath());
+            		InputStream stream = Files.newInputStream(path);
+            		img = new DefaultStreamedContent(stream);
+            	}
+            	else {
+            		Path path = Paths.get("C:/Users/Renan/workspace/workspace/uploads/branco.png");
+            		InputStream stream = Files.newInputStream(path);
+            		img = new DefaultStreamedContent(stream);
+            	}
+            }
             return img;
         }
     }

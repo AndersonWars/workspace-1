@@ -19,21 +19,21 @@ xmlns:f="http://xmlns.jcp.org/jsf/core">
 	</p:menubar>
 	</h:form>
 	
-	<p:growl id="msg"/>
+	<p:messages id="msg"/>
 	<h:form id="frmCad">
 		<p:panel header="Novo cliente">
 			<h:panelGrid columns="2">
 				<p:outputLabel value="Nome"/>
-				<p:inputText size="50" value="#{clienteBean.cliente.nomeCliente}"/>
+				<p:inputText id="nome" size="50" value="#{clienteBean.cliente.nomeCliente}" required="true" requiredMessage="Nome não pode ser vazio"/>
 				<p:outputLabel value="CPF"/>
-				<p:inputMask mask="999.999.999-99" size="50" value="#{clienteBean.cliente.cpfCliente}"/>
+				<p:inputMask mask="999.999.999-99" size="50" value="#{clienteBean.cliente.cpfCliente}" required="true" requiredMessage="CPF vazio"/>
 				<p:outputLabel value="E-mail"/>
 				<p:inputText size="50" value="#{clienteBean.cliente.emailCliente}"/>
 				<p:outputLabel value="Telefone"/>
-				<p:inputMask mask="(99)99999-9999" size="50" value="#{clienteBean.cliente.telCliente}"/>
+				<p:inputMask mask="(99)99999-9999" size="50" value="#{clienteBean.cliente.telCliente}" required="true" requiredMessage="Telefone não informado"/>
 				<p:outputLabel value="CEP"/>
 				<h:panelGroup id="s1">
-				<p:inputMask mask="99999-999" size="50" value="#{clienteBean.cliente.enderecoCliente.cepEndereco}" validatorMessage="Informe um CEP válido">
+				<p:inputMask mask="99999-999" size="50" value="#{clienteBean.cliente.enderecoCliente.cepEndereco}" required="true" requiredMessage="Informe um CEP válido">
 					<f:validateLength minimum="9" maximum="9"/>
 					<p:ajax event="blur" update=":frmCad:s1 :frmCad:s2 :frmCad:s3 :frmCad:s4 :frmCad:s5" listener="#{clienteBean.setEnderecoByCep}"/>
 				</p:inputMask>
@@ -60,9 +60,9 @@ xmlns:f="http://xmlns.jcp.org/jsf/core">
 				<p:outputLabel value="Número"/>
 				<pe:inputNumber decimalPlaces="0" value="#{clienteBean.cliente.enderecoCliente.nuLogradouro}"/>
 				<p:outputLabel value="Login"/>
-				<p:inputText size="50" value="#{clienteBean.cliente.user.dsLogin}"/>
+				<p:inputText size="50" value="#{clienteBean.cliente.user.dsLogin}" required="true" requiredMessage="Login vazio"/>
 				<p:outputLabel value="Senha"/>
-				<p:password size="50" value="#{clienteBean.cliente.user.dsSenha}"/>
+				<p:password size="50" value="#{clienteBean.cliente.user.dsSenha}" required="true" requiredMessage="Senha não pode ser vazia"/>
 				<p:outputLabel value="Confirme senha"/>
 				<p:password size="50" value="#{clienteBean.confSenha}"/>
 			</h:panelGrid>

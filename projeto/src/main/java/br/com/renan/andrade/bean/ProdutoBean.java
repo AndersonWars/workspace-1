@@ -61,6 +61,7 @@ public class ProdutoBean implements Serializable{
 		Path caminho = Paths.get("C:/Users/Renan/workspace/workspace/uploads/"+produto.getCodProduto()+".png");
 		Files.deleteIfExists(caminho);
 		listar();
+		novo();
 		Messages.addGlobalInfo(produto.getNmProduto()+" - Excluido com sucesso");
 		} catch (Exception e) {
 			e.printStackTrace();
