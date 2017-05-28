@@ -28,6 +28,10 @@
   transform: translateY(260%);
 }
 
+#tbLog {
+	border: 2px solid black;
+}
+
 .loginForm {
 	border: medium;
     border-bottom-color: black;
