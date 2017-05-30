@@ -15,9 +15,9 @@ xmlns:f="http://xmlns.jcp.org/jsf/core">
 <h:body>
 	<h:form id="formMenu">
 	<p:menubar>
-		<p:menuitem value="Clientes" title="Clientes" url="cadCliente.xhtml"/>
-		<p:menuitem value="Venda" title="Venda" url="login.xhtml"/>
-		<p:menuitem value="Produtos" title="Produtos" url="cadProduto.xhtml"/>
+		<p:menuitem icon="fa fa-male" value="Clientes" title="Clientes" url="cadCliente.xhtml"/>
+		<p:menuitem icon="fa fa-dollar" value="Venda" title="Venda" url="login.xhtml"/>
+		<p:menuitem icon="fa fa-reorder" value="Produtos" title="Produtos" url="cadProduto.xhtml"/>
 	</p:menubar>
 	</h:form>
 
@@ -33,9 +33,9 @@ xmlns:f="http://xmlns.jcp.org/jsf/core">
 				<p:outputLabel value="Descrição"/>
 				<p:inputTextarea value="#{produtoBean.produto.desProduto}" cols="55"/>
 				<p:outputLabel value="Valor venda"/>
-				<pe:inputNumber decimalSeparator="," symbol="R$ " styleClass="inputNums" value="#{produtoBean.produto.vlrProduto}"/>
+				<p:inputNumber decimalSeparator="," symbol="R$ " size="56" value="#{produtoBean.produto.vlrProduto}"/>
 				<p:outputLabel value="Estoque"/>
-				<pe:inputNumber decimalPlaces="0" value="#{produtoBean.produto.qtdProduto}"/>
+				<p:inputNumber decimalPlaces="0" value="#{produtoBean.produto.qtdProduto}" size="56"/>
 				<p:outputLabel value="Foto produto"/>
 				<p:fileUpload auto="true" id="fileUp" mode="advanced" fileUploadListener="#{produtoBean.upload}" update=":frmCad:img"/>
 			</h:panelGrid>
@@ -48,8 +48,8 @@ xmlns:f="http://xmlns.jcp.org/jsf/core">
 			</tr>
 			</table>
 			<div align="right">
-					<p:commandButton value="Salvar" id="btSalvar" actionListener="#{produtoBean.salvar}" update=":frmCad :msg :frmTab:table"/>
-					<p:commandButton value="Cancelar" id="btCancelar" actionListener="#{produtoBean.novo}" update=":frmCad :msg"/>
+					<p:commandButton value="Salvar" id="btSalvar" icon="fa fa-save" actionListener="#{produtoBean.salvar}" update=":frmCad :msg :frmTab:table"/>
+					<p:commandButton value="Cancelar" id="btCancelar" icon="fa fa-bomb" actionListener="#{produtoBean.novo}" update=":frmCad :msg"/>
 			</div>
 		</p:panel>
 	</h:form>
@@ -67,11 +67,11 @@ xmlns:f="http://xmlns.jcp.org/jsf/core">
 					<h:outputText value="R$ #{prod.vlrProduto}" />
 				</p:column>
 				<p:column headerText="Opções">
-					<p:commandButton icon="ui-icon-trash" actionListener="#{produtoBean.excluir}" update=":frmTab:table :frmCad">
+					<p:commandButton icon="fa fa-trash" actionListener="#{produtoBean.excluir}" update=":frmTab:table :frmCad">
 						<p:confirm  header="Confirmação" message="Excluir produto?" icon="ui-icon-alert"/>
 						<f:attribute name="prodExcluir" value="#{prod}"/>
 					</p:commandButton>
-					<p:commandButton icon="ui-icon-pencil" actionListener="#{produtoBean.alterar}" update=":frmTab:table :frmCad">
+					<p:commandButton icon="fa fa-pencil" actionListener="#{produtoBean.alterar}" update=":frmTab:table :frmCad">
 						<f:attribute name="prodAlterar" value="#{prod}"/>
 					</p:commandButton>
 				</p:column>	

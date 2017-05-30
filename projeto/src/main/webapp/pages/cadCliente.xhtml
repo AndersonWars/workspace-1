@@ -13,9 +13,9 @@ xmlns:f="http://xmlns.jcp.org/jsf/core">
 <h:body>
 	<h:form id="formMenu">
 	<p:menubar>
-		<p:menuitem value="Clientes" title="Clientes" url="cadCliente.xhtml"/>
-		<p:menuitem value="Venda" title="Venda" url="login.xhtml"/>
-		<p:menuitem value="Produtos" title="Produtos" url="cadProduto.xhtml"/>
+		<p:menuitem icon="fa fa-male" value="Clientes" title="Clientes" url="cadCliente.xhtml"/>
+		<p:menuitem icon="fa fa-dollar" value="Venda" title="Venda" url="login.xhtml"/>
+		<p:menuitem icon="fa fa-reorder" value="Produtos" title="Produtos" url="cadProduto.xhtml"/>
 	</p:menubar>
 	</h:form>
 	
@@ -58,7 +58,7 @@ xmlns:f="http://xmlns.jcp.org/jsf/core">
 				<p:inputText size="50" value="#{clienteBean.cliente.enderecoCliente.ruaEndereco}"/>
 				</h:panelGroup>
 				<p:outputLabel value="Número"/>
-				<pe:inputNumber decimalPlaces="0" value="#{clienteBean.cliente.enderecoCliente.nuLogradouro}"/>
+				<p:inputNumber decimalPlaces="0" value="#{clienteBean.cliente.enderecoCliente.nuLogradouro}" size="56"/>
 				<p:outputLabel value="Login"/>
 				<p:inputText size="50" value="#{clienteBean.cliente.user.dsLogin}" required="true" requiredMessage="Login vazio"/>
 				<p:outputLabel value="Senha"/>
@@ -67,8 +67,8 @@ xmlns:f="http://xmlns.jcp.org/jsf/core">
 				<p:password size="50" value="#{clienteBean.confSenha}"/>
 			</h:panelGrid>
 			<div align="right">
-				<p:commandButton value="Salvar" id="btSalvar" actionListener="#{clienteBean.salvar}" update=":msg :frmCad"/>
-				<p:commandButton value="Cancelar" id="btCancelar" actionListener="#{cidadeBean.novo}" update=":msg :frmCad"/>
+				<p:commandButton value="Salvar" icon="fa fa-save" id="btSalvar" actionListener="#{clienteBean.salvar}" update=":msg :frmCad"/>
+				<p:commandButton value="Cancelar" icon="fa fa-bomb" id="btCancelar" actionListener="#{cidadeBean.novo}" update=":msg :frmCad"/>
 			</div>
 		</p:panel>
 	</h:form>

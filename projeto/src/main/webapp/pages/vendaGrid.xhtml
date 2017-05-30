@@ -12,15 +12,15 @@ xmlns:f="http://xmlns.jcp.org/jsf/core">
 <h:body>
 	<h:form id="formMenu">
 	<p:menubar>
-		<p:menuitem value="Clientes" title="Clientes" url="cadCliente.xhtml"/>
-		<p:menuitem value="Venda" title="Venda" url="login.xhtml"/>
-		<p:menuitem value="Produtos" title="Produtos" url="cadProduto.xhtml"/>
+		<p:menuitem icon="fa fa-male" value="Clientes" title="Clientes" url="cadCliente.xhtml"/>
+		<p:menuitem icon="fa fa-dollar" value="Venda" title="Venda" url="login.xhtml"/>
+		<p:menuitem icon="fa fa-reorder" value="Produtos" title="Produtos" url="cadProduto.xhtml"/>
 	</p:menubar>
 	</h:form>
 	
 	<p:growl id="msg"/>
 	<h:form id="frmGrid">
-		<p:commandButton value="Carrinho" oncomplete="PF('carrinhoDlg').show()"/>
+		<p:commandButton icon="fa fa-shopping-cart" value="Carrinho" oncomplete="PF('carrinhoDlg').show()"/>
 			
 			<p:dataGrid var="prod" value="#{vendaBean.listProd}" columns="3" layout="grid">
 			<f:facet name="header">Lista de Produtos</f:facet>
@@ -39,10 +39,10 @@ xmlns:f="http://xmlns.jcp.org/jsf/core">
 			</tr>
 			<tr>
 			<td>
-				<p:commandButton oncomplete="PF('produtoDlg').show()" title="Adicionar ao carrinho" icon="fa fa-fw fa-cart-plus" update=":frmDlgAdc">
+				<p:commandButton oncomplete="PF('produtoDlg').show()" title="Adicionar ao carrinho" icon="fa fa-cart-plus" update=":frmDlgAdc">
 					<f:setPropertyActionListener value="#{prod}" target="#{vendaBean.produtoSelecionado}"/>
 				</p:commandButton>
-				<p:commandButton oncomplete="PF('detalhesDlg').show()" title="Detalhes produto" icon="ui-icon-search" update=":frmDlgDetalhes">
+				<p:commandButton oncomplete="PF('detalhesDlg').show()" title="Detalhes produto" icon="fa fa-search" update=":frmDlgDetalhes">
 				<f:setPropertyActionListener value="#{prod}" target="#{vendaBean.produtoSelecionado}"/>
 				</p:commandButton>
 			</td>
