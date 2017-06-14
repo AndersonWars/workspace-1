@@ -11,6 +11,7 @@ import org.omnifaces.util.*;
 
 import br.com.renan.andrade.dao.*;
 import br.com.renan.andrade.domain.*;
+import br.com.renan.andrade.util.*;
 
 @SuppressWarnings("serial")
 @ManagedBean
@@ -38,6 +39,7 @@ public class VendaBean implements Serializable {
 		try {
 			VendaDao dao = new VendaDao();
 			venda.setDat_venda(Date.from(Instant.now()));
+			venda.setCod_cliente(SessionContext.getInstance().getClienteSessao());
 			venda = dao.merge(getVenda());
 		} catch (Exception e) {
 			e.printStackTrace();

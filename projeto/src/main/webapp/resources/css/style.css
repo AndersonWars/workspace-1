@@ -1,5 +1,9 @@
 @CHARSET "UTF-8";
 
+.logo {
+	padding-bottom: 5pt;
+}
+
 .combo {
 	width: 92% !important;
 }
