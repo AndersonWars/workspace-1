@@ -38,8 +38,8 @@ public class VendaBean implements Serializable {
 	public void salvaVenda() {
 		try {
 			VendaDao dao = new VendaDao();
-			venda.setDat_venda(Date.from(Instant.now()));
-			venda.setCod_cliente(SessionContext.getInstance().getClienteSessao());
+			venda.setDatVenda(Date.from(Instant.now()));
+			venda.setCodCliente(SessionContext.getInstance().getClienteSessao());
 			venda = dao.merge(getVenda());
 		} catch (Exception e) {
 			e.printStackTrace();
