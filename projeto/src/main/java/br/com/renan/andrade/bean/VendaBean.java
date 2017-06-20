@@ -49,7 +49,7 @@ public class VendaBean implements Serializable {
 	private void salvarItem(ItemVenda item) {
 		try {
 			ItemVendaDao dao = new ItemVendaDao();
-			itensVenda.add(dao.merge(item)); 
+			dao.merge(item); 
 		} catch (Exception e) {
 			Messages.addGlobalError("Erro ao inserir novo item");
 			itensVenda.remove(itensVenda.size()-1);
@@ -66,6 +66,8 @@ public class VendaBean implements Serializable {
 		itemVenda.setQtdItem(getQtdItens());
 		itemVenda.setCodVenda(venda);
 		itemVenda.setVlrItem(itemVenda.getQtdItem()*produtoSelecionado.getVlrProduto());
+		itemVenda.setSeqItem(itensVenda.size()+1);
+		itensVenda.add(itemVenda);
 		salvarItem(itemVenda);
 	}
 	

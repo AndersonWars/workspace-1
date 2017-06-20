@@ -32,7 +32,7 @@ public class LoginBean implements Serializable {
 				Cliente cliente = new ClienteDao().buscaPorUsuario(usuario.getCdUsuario());
 				if (cliente != null) {
 					SessionContext.getInstance().setClienteSessao(cliente);
-					return "vendaGrid?faces-redirect=true";
+					return "/pages/vendaGrid?faces-redirect=true";
 				} else {
 					// return pagina do funcionario
 				}

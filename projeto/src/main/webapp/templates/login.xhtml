@@ -19,9 +19,9 @@ xmlns:f="http://xmlns.jcp.org/jsf/core">
 	<td>
 	<h:panelGrid columns="2" styleClass="loginForm">
 			<p:outputLabel value="Usuário:"/>
-			<p:inputText value="#{dsLogin}"/>
+			<p:inputText value="#{loginBean.dsLogin}"/>
 			<p:outputLabel value="Senha:"/>
-			<p:password value="#{dsSenha}"/>
+			<p:password value="#{loginBean.dsSenha}"/>
 			<p:commandButton value="Entrar" action="#{loginBean.fazLogin}" update=":msg"/>
 			<p:commandButton value="Cancelar"/>
 	</h:panelGrid>
