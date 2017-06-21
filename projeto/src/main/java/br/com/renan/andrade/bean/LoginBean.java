@@ -47,6 +47,11 @@ public class LoginBean implements Serializable {
 		}
 		return null;
 	}
+	
+	public void resetData() {
+		setDsLogin("");
+		setDsSenha("");
+	}
 
 	public Usuario getUsuario() {
 		return usuario;
