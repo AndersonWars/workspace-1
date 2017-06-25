@@ -24,7 +24,7 @@ xmlns:ui="http://java.sun.com/jsf/facelets">
 				<p:menuitem icon="fa fa-reorder" value="Produtos" title="Produtos" url="/pages/cadProduto.xhtml"/>
 				<f:facet name="options">
 					<p:commandButton value="Login" actionListener="#{loginBean.resetData}" oncomplete="PF('loginDlg').show()" style="float: right;" rendered="#{!homeBean.userLogado}" update=":frmLog:dlg"/>
-					<p:commandButton value="Cadastrar-se" action="/pages/cadCliente.xhtml" rendered="#{!homeBean.userLogado}"/>
+					<p:commandButton value="Cadastrar-se" action="/cadcli/cadCliente.xhtml" rendered="#{!homeBean.userLogado}"/>
 					<p:commandLink value="Sair" action="#{homeBean.logout}" rendered="#{homeBean.userLogado}" style="padding-right:5px;"/>
 					<p:outputLabel value="#{homeBean.userName}" rendered="#{homeBean.userLogado}"/>
 				</f:facet>

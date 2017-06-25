@@ -46,7 +46,7 @@ template="/templates/principal.xhtml">
 		<p:dialog  header="#{vendaBean.produtoSelecionado.nmProduto}" modal="true" resizable="false" showEffect="fade" hideEffect="fade" widgetVar="detalhesDlg" draggable="false">
 				<table>
 				<tr><td>
-					<p:graphicImage value="#{imageBean.img}" width="150">
+					<p:graphicImage value="#{imageBean.img}" width="300">
 						<f:param name="parCodigo" value="#{vendaBean.produtoSelecionado.codProduto}" />
 					</p:graphicImage>
 				</td></tr>
@@ -61,7 +61,7 @@ template="/templates/principal.xhtml">
 		<h:form id="frmDlgAdc">
 		<p:panelGrid header="Item" columns="1">
 			<p:outputLabel value="#{vendaBean.produtoSelecionado.nmProduto}"/>
-			<p:graphicImage value="#{imageBean.img}" width="150">
+			<p:graphicImage value="#{imageBean.img}" width="300">
 					<f:param name="parCodigo" value="#{vendaBean.produtoSelecionado.codProduto}"/>
 			</p:graphicImage>
 		</p:panelGrid><br/>
@@ -89,6 +89,7 @@ template="/templates/principal.xhtml">
 					<p:commandButton icon="fa fa-times" actionListener="#{vendaBean.excluiItem(item)}" title="Excluir" update=":cartDlg:table"/>
 				</p:column>
 			</p:dataTable>
+			<p:commandButton value="Finalizar compra" actionListener="#{vendaBean.finalizarCompra}" update=":msg"/>
 		</h:form>
 	</p:dialog>
 	
@@ -96,7 +97,7 @@ template="/templates/principal.xhtml">
 	<p:dialog header="#{vendaBean.itemSelecionado.codProduto.nmProduto}" modal="true" resizable="false" showEffect="fade" hideEffect="fade" widgetVar="detalhesDlg2" draggable="false">
 				<table>
 				<tr><td>
-					<p:graphicImage value="#{imageBean.img}" width="150">
+					<p:graphicImage value="#{imageBean.img}" width="300">
 						<f:param name="parCodigo" value="#{vendaBean.itemSelecionado.codProduto.codProduto}" />
 					</p:graphicImage>
 				</td></tr>

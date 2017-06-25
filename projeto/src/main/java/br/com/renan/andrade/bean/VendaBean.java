@@ -33,6 +33,7 @@ public class VendaBean implements Serializable {
 		usuario = new Usuario();
 		itensVenda = new ArrayList<ItemVenda>();
 		venda = new Venda();
+		venda.setCodCliente(SessionContext.getInstance().getClienteSessao());
 	}
 	
 	public void salvaVenda() {
@@ -49,7 +50,8 @@ public class VendaBean implements Serializable {
 	private void salvarItem(ItemVenda item) {
 		try {
 			ItemVendaDao dao = new ItemVendaDao();
-			dao.merge(item); 
+			dao.merge(item);
+			afterSalvarItem(item, true);
 		} catch (Exception e) {
 			Messages.addGlobalError("Erro ao inserir novo item");
 			itensVenda.remove(itensVenda.size()-1);
@@ -71,6 +73,18 @@ public class VendaBean implements Serializable {
 		salvarItem(itemVenda);
 	}
 	
+	private void afterSalvarItem(ItemVenda item, boolean sucesso) {
+		if (sucesso) {
+			Produto produto = item.getCodProduto();
+			produto.setQtdProduto(produto.getQtdProduto() - item.getQtdItem());
+			try {
+				new ProdutoDao().merge(produto);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
 	public void excluiItem(ItemVenda item) {
 		try {
 			new ItemVendaDao().excluir(item);
@@ -80,6 +94,27 @@ public class VendaBean implements Serializable {
 			Messages.addGlobalError("Erro ao excluir item");
 			e.printStackTrace();
 		} 
+	}
+	
+	public void finalizarCompra() {
+		ClienteDao dao = new ClienteDao();
+		VendaDao vDao = new VendaDao();
+		if (venda.getCodCliente() != null && dao.clienteExiste(venda.getCodCliente().getCodCliente())) {
+			if (itensVenda.size() > 0) {
+				try {
+					vDao.merge(venda);
+					Messages.addGlobalInfo("Venda completada");
+				} catch (Exception e) {
+					e.printStackTrace();
+					Messages.addGlobalError("Erro ao finalizar venda");
+					vDao.excluir(venda);
+				}
+			} else {
+				Messages.addGlobalError("Essa venda não possui itens");
+			}
+		} else {
+			Messages.addGlobalError("Cliente da venda é inválido");
+		}
 	}
 
 	public Venda getVenda() {

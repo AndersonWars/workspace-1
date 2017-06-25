@@ -52,7 +52,7 @@ public class Venda implements Serializable{
 		return vlrVenda;
 	}
 
-	public void setVlr_venda(Double vlrVenda) {
+	public void setVlrVenda(Double vlrVenda) {
 		this.vlrVenda = vlrVenda;
 	}
 }
