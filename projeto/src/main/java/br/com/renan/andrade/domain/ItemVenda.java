@@ -17,6 +17,9 @@ public class ItemVenda implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
+	private Long cdItem;
+	
+	@Column
 	private Integer seqItem;
 	
 	@ManyToOne
@@ -73,7 +76,13 @@ public class ItemVenda implements Serializable{
 	public void setQtdItem(Integer qtdItem) {
 		this.qtdItem = qtdItem;
 	}
-	
-	
 
+	public Long getCdItem() {
+		return cdItem;
+	}
+
+	public void setCdItem(Long cdItem) {
+		this.cdItem = cdItem;
+	}
+	
 }

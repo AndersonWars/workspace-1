@@ -20,7 +20,7 @@ xmlns:ui="http://java.sun.com/jsf/facelets">
 			<h:form id="frmMenu">
 			<p:menubar>
 				<p:menuitem icon="fa fa-male" value="Clientes" title="Clientes" url="/pages/cadCliente.xhtml"/>
-				<p:menuitem icon="fa fa-dollar" value="Venda" title="Venda" url="/pages/vendaGrid.xhtml"/>
+				<p:menuitem icon="fa fa-dollar" value="Venda" title="Venda" url="/pages/listVenda.xhtml"/>
 				<p:menuitem icon="fa fa-reorder" value="Produtos" title="Produtos" url="/pages/cadProduto.xhtml"/>
 				<f:facet name="options">
 					<p:commandButton value="Login" actionListener="#{loginBean.resetData}" oncomplete="PF('loginDlg').show()" style="float: right;" rendered="#{!homeBean.userLogado}" update=":frmLog:dlg"/>

@@ -5,6 +5,7 @@ import java.util.*;
 
 import javax.annotation.*;
 import javax.faces.bean.*;
+import javax.faces.event.*;
 
 import org.omnifaces.util.*;
 
@@ -29,6 +30,13 @@ public class ListVendaBean implements Serializable {
 			Messages.addGlobalError("Erro ao carregar lista de vendas");
 		}
 	}
+	
+	public void loadItens(ActionEvent event) {
+		Venda venda = (Venda) event.getComponent().getAttributes().get("vendFilter");
+		if (venda != null) {
+			itensVenda = new ItemVendaDao().buscaPorVenda(venda);
+		}
+	}
 
 	public List<Venda> getVendas() {
 		return vendas;
@@ -36,6 +44,14 @@ public class ListVendaBean implements Serializable {
 
 	public void setVendas(List<Venda> vendas) {
 		this.vendas = vendas;
+	}
+
+	public List<ItemVenda> getItensVenda() {
+		return itensVenda;
+	}
+
+	public void setItensVenda(List<ItemVenda> itensVenda) {
+		this.itensVenda = itensVenda;
 	}
 	
 }

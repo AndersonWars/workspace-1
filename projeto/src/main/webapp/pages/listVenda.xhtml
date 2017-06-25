@@ -12,29 +12,44 @@ template="/templates/principal.xhtml">
 		<h:form id="frmTab">
 		<p:panel header="Lista de Vendas">
 			<p:dataTable id="table" emptyMessage="Sem registros" paginator="true" value="#{listVendaBean.vendas}" var="venda" rows="4">
-				<p:column headerText="Nome" sortBy="#{prod.nmProduto}" filterBy="#{prod.nmProduto}">
-					<h:outputText value="#{prod.nmProduto}"/>
+				<p:column headerText="Cód Venda" sortBy="#{prod.nmProduto}">
+					<h:outputText value="#{venda.codVenda}"/>
 				</p:column>
-				<p:column headerText="Estoque">
-					<h:outputText value="#{prod.qtdProduto} Unidades"/>
-				</p:column>
-				<p:column headerText="Preço">
-					<h:outputText value="R$ #{prod.vlrProduto}" />
+				<p:column headerText="Valor">
+					<h:outputText value="R$ #{venda.vlrVenda}"/>
 				</p:column>
 				<p:column headerText="Opções">
-					<p:commandButton icon="fa fa-trash" actionListener="#{produtoBean.excluir}" update=":frmTab:table :frmCad">
-						<p:confirm  header="Confirmação" message="Excluir produto?" icon="ui-icon-alert"/>
-						<f:attribute name="prodExcluir" value="#{prod}"/>
-					</p:commandButton>
-					<p:commandButton icon="fa fa-pencil" actionListener="#{produtoBean.alterar}" update=":frmTab:table :frmCad">
-						<f:attribute name="prodAlterar" value="#{prod}"/>
+					<p:commandButton icon="fa fa-pencil" actionListener="#{listVendaBean.loadItens}" oncomplete="PF('dialog').show();" title="Itens" update=":frmDlg">
+						<f:attribute name="vendFilter" value="#{venda}"/>
 					</p:commandButton>
 				</p:column>	
 			</p:dataTable>
-			
+			<div align="right">
+				<p:commandButton value="Nova venda" action="/pages/vendaGrid.xhtml"/>
+			</div>
 			</p:panel>
 		</h:form>
-
+		
+		
+			<p:dialog header="Itens" widgetVar="dialog" resizable="false" draggable="false" modal="true" closable="false">
+				<h:form id="frmDlg">
+				<p:dataTable id="tbItem" emptyMessage="Sem registros" paginator="true" value="#{listVendaBean.itensVenda}" var="itemvenda" rows="4">
+					<p:column headerText="Imagem">
+						<p:graphicImage value="#{imageBean.img}" width="75" id="img" cache="false">
+							<f:param name="parCodigo" value="#{itemvenda.codProduto.codProduto}"/>
+						</p:graphicImage>
+					</p:column>
+					<p:column headerText="Nome produto">
+						<h:outputText value="#{itemvenda.codProduto.nmProduto}"/>
+					</p:column>
+					<p:column headerText="Valor">
+						<h:outputText value="#{itemvenda.vlrItem}" />
+					</p:column>
+				</p:dataTable>
+				<p:commandButton value="Fechar" oncomplete="PF('dialog').hide();"/>
+				</h:form>
+			</p:dialog>
+		
 		</h:body>
 	</ui:define>
 </ui:composition>

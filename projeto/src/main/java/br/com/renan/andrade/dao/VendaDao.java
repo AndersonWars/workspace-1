@@ -14,7 +14,7 @@ public class VendaDao extends GenericDao<Venda> {
 	public List<Venda> buscaPorCliente(Cliente cliente) throws Exception{
 		Session sessao = HibernateUtil.getFabricaDeSessoes().openSession();
 		Criteria criterio = sessao.createCriteria(Venda.class);
-		criterio.add(Restrictions.eq("cod_cliente.codCliente", cliente.getCodCliente()));
+		criterio.add(Restrictions.eq("codCliente.codCliente", cliente.getCodCliente()));
 		return criterio.list();
 	}
 

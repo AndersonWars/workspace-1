@@ -102,6 +102,11 @@ public class VendaBean implements Serializable {
 		if (venda.getCodCliente() != null && dao.clienteExiste(venda.getCodCliente().getCodCliente())) {
 			if (itensVenda.size() > 0) {
 				try {
+					Double valorFinal = 0.0;
+					for (ItemVenda i : itensVenda) {
+						valorFinal += i.getVlrItem();
+					}
+					venda.setVlrVenda(valorFinal);
 					vDao.merge(venda);
 					Messages.addGlobalInfo("Venda completada");
 				} catch (Exception e) {
