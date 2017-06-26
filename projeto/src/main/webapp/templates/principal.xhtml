@@ -19,10 +19,11 @@ xmlns:ui="http://java.sun.com/jsf/facelets">
 		<div id="menu">
 			<h:form id="frmMenu">
 			<p:menubar>
-				<p:menuitem icon="fa fa-male" value="Clientes" title="Clientes" url="/pages/cadCliente.xhtml"/>
-				<p:menuitem icon="fa fa-dollar" value="Venda" title="Venda" url="/pages/listVenda.xhtml"/>
-				<p:menuitem icon="fa fa-reorder" value="Produtos" title="Produtos" url="/pages/cadProduto.xhtml"/>
+				<p:menuitem icon="fa fa-male" value="Clientes" title="Clientes" url="/pages/cadCliente.xhtml" rendered="#{homeBean.userFunc}"/>
+				<p:menuitem icon="fa fa-dollar" value="Venda" title="Venda" url="/pages/listVenda.xhtml" rendered="#{homeBean.cliente}"/>
+				<p:menuitem icon="fa fa-reorder" value="Produtos" title="Produtos" url="/pages/cadProduto.xhtml" rendered="#{homeBean.userFunc}"/>
 				<f:facet name="options">
+					<p:commandButton value="Cadastrar usuário" action="/pages/cadUser.xhtml" rendered="#{homeBean.userFunc}"/>
 					<p:commandButton value="Login" actionListener="#{loginBean.resetData}" oncomplete="PF('loginDlg').show()" style="float: right;" rendered="#{!homeBean.userLogado}" update=":frmLog:dlg"/>
 					<p:commandButton value="Cadastrar-se" action="/cadcli/cadCliente.xhtml" rendered="#{!homeBean.userLogado}"/>
 					<p:commandLink value="Sair" action="#{homeBean.logout}" rendered="#{homeBean.userLogado}" style="padding-right:5px;"/>
@@ -46,6 +47,7 @@ xmlns:ui="http://java.sun.com/jsf/facelets">
 			<p:commandButton value="Entrar" action="#{loginBean.fazLogin}" update=":msg"/>
 			<p:commandButton value="Cancelar" oncomplete="PF('loginDlg').hide()"/>
 		</h:panelGrid>
+		<p:commandLink value="." action="/caduser/cadUser.xhtml"/>
 		</p:dialog>
 	</h:form>
 </h:body>

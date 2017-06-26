@@ -6,6 +6,7 @@ import java.util.*;
 import javax.annotation.*;
 import javax.faces.bean.*;
 
+import br.com.renan.andrade.domain.*;
 import br.com.renan.andrade.util.*;
 
 @SuppressWarnings("serial")
@@ -24,8 +25,18 @@ public class HomeBean implements Serializable {
 		
 	}
 	
+	public boolean isCliente() {
+		Usuario user = SessionContext.getInstance().getUsuarioLogado();
+		Cliente cliente = SessionContext.getInstance().getClienteSessao();
+		return cliente != null && cliente.getUser().getCdUsuario().equals(user.getCdUsuario());
+	}
+	
 	public boolean isUserLogado() {
 		return SessionContext.getInstance().getUsuarioLogado() != null;
+	}
+	
+	public boolean isUserFunc() {
+		return SessionContext.getInstance().getUsuarioLogado() != null && SessionContext.getInstance().getClienteSessao() == null;
 	}
 	
 	public String logout() {

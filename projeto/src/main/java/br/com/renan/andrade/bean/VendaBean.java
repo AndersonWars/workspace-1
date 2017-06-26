@@ -50,7 +50,7 @@ public class VendaBean implements Serializable {
 	private void salvarItem(ItemVenda item) {
 		try {
 			ItemVendaDao dao = new ItemVendaDao();
-			dao.merge(item);
+			itensVenda.add(dao.merge(item));
 			afterSalvarItem(item, true);
 		} catch (Exception e) {
 			Messages.addGlobalError("Erro ao inserir novo item");
@@ -69,7 +69,6 @@ public class VendaBean implements Serializable {
 		itemVenda.setCodVenda(venda);
 		itemVenda.setVlrItem(itemVenda.getQtdItem()*produtoSelecionado.getVlrProduto());
 		itemVenda.setSeqItem(itensVenda.size()+1);
-		itensVenda.add(itemVenda);
 		salvarItem(itemVenda);
 	}
 	
@@ -96,7 +95,7 @@ public class VendaBean implements Serializable {
 		} 
 	}
 	
-	public void finalizarCompra() {
+	public String finalizarCompra() {
 		ClienteDao dao = new ClienteDao();
 		VendaDao vDao = new VendaDao();
 		if (venda.getCodCliente() != null && dao.clienteExiste(venda.getCodCliente().getCodCliente())) {
@@ -109,6 +108,7 @@ public class VendaBean implements Serializable {
 					venda.setVlrVenda(valorFinal);
 					vDao.merge(venda);
 					Messages.addGlobalInfo("Venda completada");
+					return "/pages/listVenda?faces-redirect=true";
 				} catch (Exception e) {
 					e.printStackTrace();
 					Messages.addGlobalError("Erro ao finalizar venda");
@@ -120,6 +120,7 @@ public class VendaBean implements Serializable {
 		} else {
 			Messages.addGlobalError("Cliente da venda é inválido");
 		}
+		return "";
 	}
 
 	public Venda getVenda() {

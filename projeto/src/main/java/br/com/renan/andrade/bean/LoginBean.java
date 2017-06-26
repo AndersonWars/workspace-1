@@ -26,18 +26,18 @@ public class LoginBean implements Serializable {
 	
 	public String fazLogin() {
 		try {
-			usuario = new UsuarioDao().procuraUsuario(dsLogin, dsSenha);
+			usuario = new UsuarioDao().procuraUsuario(dsLogin, CryptoUtil.generateCryptedPassword(dsSenha));
 			if (usuario != null) {
 				SessionContext.getInstance().setUsuarioLogado(usuario);
 				Cliente cliente = new ClienteDao().buscaPorUsuario(usuario.getCdUsuario());
 				if (cliente != null) {
 					SessionContext.getInstance().setClienteSessao(cliente);
-					return "/pages/vendaGrid?faces-redirect=true";
+					return "/pages/listVenda?faces-redirect=true";
 				} else {
-					// return pagina do funcionario
+					return "/templates/home.xhtml?faces-redirect=true";
 				}
 			} else {
-				return "";
+				throw new NumberFormatException();
 			}
 		} catch (NumberFormatException e) {
 			Messages.addGlobalWarn("Usuário não encontrado");
@@ -45,7 +45,7 @@ public class LoginBean implements Serializable {
 			Messages.addGlobalError("Erro ao efetuar login");
 			e.printStackTrace();
 		}
-		return null;
+		return "";
 	}
 	
 	public void resetData() {

@@ -82,6 +82,9 @@ template="/templates/principal.xhtml">
 				<p:column headerText="Qtd.">
 					<p:outputLabel value="#{item.qtdItem}"/>
 				</p:column>
+				<p:column headerText="Preço">
+					<p:outputLabel value="#{item.vlrItem}"/>
+				</p:column>
 				<p:column>
 					<p:commandButton icon="fa fa-search" oncomplete="PF('detalhesDlg2').show()" update=":frmDlgDetalhes2">
 						<f:setPropertyActionListener value="#{item}" target="#{vendaBean.itemSelecionado}"/>
@@ -89,7 +92,7 @@ template="/templates/principal.xhtml">
 					<p:commandButton icon="fa fa-times" actionListener="#{vendaBean.excluiItem(item)}" title="Excluir" update=":cartDlg:table"/>
 				</p:column>
 			</p:dataTable>
-			<p:commandButton value="Finalizar compra" actionListener="#{vendaBean.finalizarCompra}" update=":msg"/>
+			<p:commandButton value="Finalizar compra" action="#{vendaBean.finalizarCompra}" oncomplete="PF('carrinhoDlg').hide()" update=":msg"/>
 		</h:form>
 	</p:dialog>
 	

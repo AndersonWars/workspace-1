@@ -53,7 +53,7 @@ template="/templates/principal.xhtml">
 				<p:outputLabel value="Login"/>
 				<p:inputText size="50" value="#{clienteBean.cliente.user.dsLogin}" required="true" requiredMessage="Login vazio"/>
 				<p:outputLabel value="Senha"/>
-				<p:password size="50" value="#{clienteBean.cliente.user.dsSenha}" required="true" requiredMessage="Senha não pode ser vazia"/>
+				<p:password size="50" value="#{clienteBean.dsSenha}" required="true" requiredMessage="Senha não pode ser vazia"/>
 				<p:outputLabel value="Confirme senha"/>
 				<p:password size="50" value="#{clienteBean.confSenha}"/>
 			</h:panelGrid>

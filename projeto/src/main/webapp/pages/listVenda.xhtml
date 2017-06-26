@@ -19,7 +19,7 @@ template="/templates/principal.xhtml">
 					<h:outputText value="R$ #{venda.vlrVenda}"/>
 				</p:column>
 				<p:column headerText="Opções">
-					<p:commandButton icon="fa fa-pencil" actionListener="#{listVendaBean.loadItens}" oncomplete="PF('dialog').show();" title="Itens" update=":frmDlg">
+					<p:commandButton icon="fa fa-search" actionListener="#{listVendaBean.loadItens}" oncomplete="PF('dialog').show();" title="Itens" update=":frmDlg">
 						<f:attribute name="vendFilter" value="#{venda}"/>
 					</p:commandButton>
 				</p:column>	

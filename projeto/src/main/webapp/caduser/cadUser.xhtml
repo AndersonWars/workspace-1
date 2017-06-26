@@ -15,7 +15,7 @@ template="/templates/principal.xhtml">
 				<p:outputLabel value="Login"/>
 				<p:inputText size="50" value="#{usuarioBean.usuario.dsLogin}"/>
 				<p:outputLabel value="Senha"/>
-				<p:password size="50" value="#{usuarioBean.usuario.dsSenha}"/>
+				<p:password size="50" value="#{usuarioBean.dsSenha}"/>
 				<p:outputLabel value="Confirmar senha"/>
 				<p:password size="50" value="#{usuarioBean.confSenha}"/>
 				<h:panelGrid columns="2">
@@ -26,7 +26,7 @@ template="/templates/principal.xhtml">
 				</h:panelGrid>
 			</h:panelGrid>
 			<div align="right">
-				<p:commandButton value="Salvar" id="btSalvar" actionListener="#{usuarioBean.salvar}" update=":msg :frmCad"/>
+				<p:commandButton value="Salvar" id="btSalvar" action="#{usuarioBean.salvar}" update=":msg :frmCad"/>
 				<p:commandButton value="Cancelar" id="btCancelar" actionListener="#{usuarioBean.novo}" update=":frmCad"/>
 			</div>
 		</p:panel>
