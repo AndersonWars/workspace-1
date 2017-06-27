@@ -20,7 +20,7 @@ public class ClienteBean implements Serializable{
 	
 	private Cliente cliente;
 	private List<Estado> estados;
-	private String confSenha;
+	private String dsSenha,confSenha;
 	
 	@PostConstruct
 	public void novo() {
@@ -45,6 +45,7 @@ public class ClienteBean implements Serializable{
 		try {
 			ClienteDao dao = new ClienteDao();
 			if (validateSenha()) {
+				getCliente().getUser().setDsSenha(CryptoUtil.generateCryptedPassword(getDsSenha()));
 				getCliente().getUser().setComprar(true);
 				dao.merge(getCliente());
 				Messages.addGlobalInfo("Cliente "+getCliente().getNomeCliente()+" cadastrado com sucesso");
@@ -79,8 +80,16 @@ public class ClienteBean implements Serializable{
 		this.confSenha = confSenha;
 	}
 	
+	public String getDsSenha() {
+		return dsSenha;
+	}
+
+	public void setDsSenha(String dsSenha) {
+		this.dsSenha = dsSenha;
+	}
+
 	private Boolean validateSenha() {
-		if (!cliente.getUser().getDsSenha().equals(confSenha)) {
+		if (!getDsSenha().equals(confSenha)) {
 			Messages.addGlobalError("Senha não confere. Tente novamente");
 			return false;
 		}

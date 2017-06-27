@@ -1,25 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
 xmlns:h="http://xmlns.jcp.org/jsf/html"
 xmlns:p="http://primefaces.org/ui"
 xmlns:pe="http://primefaces.org/ui/extensions"
-xmlns:f="http://xmlns.jcp.org/jsf/core">
-<h:head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<f:facet name="last">
-	<h:outputStylesheet name="css/style.css"/>
-</f:facet>
-<title>Produtos</title>
-</h:head>
-<h:body>
-	<p:menubar>
-		<p:submenu label="Clientes"></p:submenu>
-		<p:submenu label="Venda"></p:submenu>
-		<p:submenu label="Produtos"></p:submenu>
-	</p:menubar>
+xmlns:f="http://xmlns.jcp.org/jsf/core"
+xmlns:ui="http://java.sun.com/jsf/facelets"
+template="/templates/principal.xhtml">
 
-	<p:growl id="msg"/>
+<ui:define name="telas">
+
 	<h:form id="frmCad" enctype="multipart/form-data">
 		<p:panel header="Produtos">
 		<table>
@@ -31,23 +21,23 @@ xmlns:f="http://xmlns.jcp.org/jsf/core">
 				<p:outputLabel value="Descrição"/>
 				<p:inputTextarea value="#{produtoBean.produto.desProduto}" cols="55"/>
 				<p:outputLabel value="Valor venda"/>
-				<pe:inputNumber decimalSeparator="," symbol="R$ " styleClass="inputNums" value="#{produtoBean.produto.vlrProduto}"/>
+				<p:inputNumber decimalSeparator="," symbol="R$ " size="56" value="#{produtoBean.produto.vlrProduto}"/>
 				<p:outputLabel value="Estoque"/>
-				<pe:inputNumber decimalPlaces="0" value="#{produtoBean.produto.qtdProduto}"/>
+				<p:inputNumber decimalPlaces="0" value="#{produtoBean.produto.qtdProduto}" size="56"/>
 				<p:outputLabel value="Foto produto"/>
 				<p:fileUpload auto="true" id="fileUp" mode="advanced" fileUploadListener="#{produtoBean.upload}" update=":frmCad:img"/>
 			</h:panelGrid>
 			</td>
 			<td>
-				<p:graphicImage value="#{imageBean.img}" width="250" id="img">
+				<p:graphicImage value="#{imageBean.img}" width="250" id="img" cache="false">
 					<f:param name="parCodigo" value="#{produtoBean.produto.codProduto}"/>
 				</p:graphicImage>
 			</td>
 			</tr>
 			</table>
 			<div align="right">
-					<p:commandButton value="Salvar" id="btSalvar" actionListener="#{produtoBean.salvar}" update=":frmCad :msg :frmTab:table"/>
-					<p:commandButton value="Cancelar" id="btCancelar" actionListener="#{produtoBean.novo}" update=":frmCad :msg"/>
+					<p:commandButton value="Salvar" id="btSalvar" icon="fa fa-save" actionListener="#{produtoBean.salvar}" update=":frmCad :msg :frmTab:table"/>
+					<p:commandButton value="Cancelar" id="btCancelar" icon="fa fa-bomb" actionListener="#{produtoBean.novo}" update=":frmCad :msg"/>
 			</div>
 		</p:panel>
 	</h:form>
@@ -65,11 +55,11 @@ xmlns:f="http://xmlns.jcp.org/jsf/core">
 					<h:outputText value="R$ #{prod.vlrProduto}" />
 				</p:column>
 				<p:column headerText="Opções">
-					<p:commandButton icon="ui-icon-trash" actionListener="#{produtoBean.excluir}" update=":frmTab:table">
+					<p:commandButton icon="fa fa-trash" actionListener="#{produtoBean.excluir}" update=":frmTab:table :frmCad">
 						<p:confirm  header="Confirmação" message="Excluir produto?" icon="ui-icon-alert"/>
 						<f:attribute name="prodExcluir" value="#{prod}"/>
 					</p:commandButton>
-					<p:commandButton icon="ui-icon-pencil" actionListener="#{produtoBean.alterar}" update=":frmCad">
+					<p:commandButton icon="fa fa-pencil" actionListener="#{produtoBean.alterar}" update=":frmTab:table :frmCad">
 						<f:attribute name="prodAlterar" value="#{prod}"/>
 					</p:commandButton>
 				</p:column>	
@@ -82,5 +72,5 @@ xmlns:f="http://xmlns.jcp.org/jsf/core">
 			
 			</p:panel>
 		</h:form>
-</h:body>
-</html>
+</ui:define>
+</ui:composition>

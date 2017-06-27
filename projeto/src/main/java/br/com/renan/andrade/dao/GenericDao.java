@@ -72,7 +72,7 @@ public class GenericDao <Entidade>{
 		Transaction t = null;
 		try {
 			t = sessao.beginTransaction();
-			sessao.delete(entidade);
+			sessao.delete(sessao.merge(entidade));
 			t.commit();
 		} catch (Exception e) {
 			if(t!=null){

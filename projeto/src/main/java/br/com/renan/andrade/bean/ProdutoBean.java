@@ -6,9 +6,7 @@ import java.util.*;
 
 import javax.annotation.*;
 import javax.faces.bean.*;
-import javax.faces.context.*;
 import javax.faces.event.*;
-import javax.imageio.*;
 
 import org.omnifaces.util.*;
 import org.primefaces.event.*;
@@ -54,6 +52,10 @@ public class ProdutoBean implements Serializable{
 	}
 	
 	public void excluir(ActionEvent event) {
+		File f = new File("C:/Users/Renan/workspace/workspace/uploads/temp.png");
+		if (f.isFile()) {
+			f.delete();
+		}
 		try {
 		produto = (Produto)event.getComponent().getAttributes().get("prodExcluir");
 		ProdutoDao dao = new ProdutoDao();
@@ -61,6 +63,7 @@ public class ProdutoBean implements Serializable{
 		Path caminho = Paths.get("C:/Users/Renan/workspace/workspace/uploads/"+produto.getCodProduto()+".png");
 		Files.deleteIfExists(caminho);
 		listar();
+		novo();
 		Messages.addGlobalInfo(produto.getNmProduto()+" - Excluido com sucesso");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -68,6 +71,10 @@ public class ProdutoBean implements Serializable{
 	}
 	
 	public void alterar(ActionEvent event) {
+		File f = new File("C:/Users/Renan/workspace/workspace/uploads/temp.png");
+		if (f.isFile()) {
+			f.delete();
+		}
 		produto = (Produto)event.getComponent().getAttributes().get("prodAlterar");
 		produto.setCaminhoUpload("C:/Users/Renan/workspace/workspace/uploads/"+produto.getCodProduto()+".png");
 	}

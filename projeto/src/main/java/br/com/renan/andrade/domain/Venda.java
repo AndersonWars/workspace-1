@@ -11,50 +11,48 @@ public class Venda implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Long cod_venda;
+	private Long codVenda;
 	
 	
 	@JoinColumn
 	@ManyToOne(cascade=CascadeType.ALL)
-	private Cliente cod_cliente;
+	private Cliente codCliente;
 	
 	@Column
-	private Date dat_venda;
+	private Date datVenda;
 	
 	@Column
-	private Double vlr_venda;
+	private Double vlrVenda;
 
-	public Long getCod_venda() {
-		return cod_venda;
+	public Long getCodVenda() {
+		return codVenda;
 	}
 
-	public void setCod_venda(Long cod_venda) {
-		this.cod_venda = cod_venda;
+	public void setCodVenda(Long codVenda) {
+		this.codVenda = codVenda;
 	}
 
-	public Cliente getCod_cliente() {
-		return cod_cliente;
+	public Cliente getCodCliente() {
+		return codCliente;
 	}
 
-	public void setCod_cliente(Cliente cod_cliente) {
-		this.cod_cliente = cod_cliente;
+	public void setCodCliente(Cliente codCliente) {
+		this.codCliente = codCliente;
 	}
 
-	public Date getDat_venda() {
-		return dat_venda;
+	public Date getDatVenda() {
+		return datVenda;
 	}
 
-	public void setDat_venda(Date dat_venda) {
-		this.dat_venda = dat_venda;
+	public void setDatVenda(Date datVenda) {
+		this.datVenda = datVenda;
 	}
 
-	public Double getVlr_venda() {
-		return vlr_venda;
+	public Double getVlrVenda() {
+		return vlrVenda;
 	}
 
-	public void setVlr_venda(Double vlr_venda) {
-		this.vlr_venda = vlr_venda;
+	public void setVlrVenda(Double vlrVenda) {
+		this.vlrVenda = vlrVenda;
 	}
-	
-	
 }

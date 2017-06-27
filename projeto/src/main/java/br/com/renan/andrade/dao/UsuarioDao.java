@@ -8,12 +8,12 @@ import br.com.renan.andrade.util.*;
 
 public class UsuarioDao extends GenericDao<Usuario> {
 	
-	public Usuario procuraUsuario(Usuario usuario) throws Exception{
+	public Usuario procuraUsuario(String login, byte[] senha) throws Exception{
 		Session session = HibernateUtil.getFabricaDeSessoes().openSession();
 		Usuario user = null;
 		Criteria criterio = session.createCriteria(Usuario.class);
-		criterio.add(Restrictions.eq("dsLogin", usuario.getDsLogin()));
-		criterio.add(Restrictions.eq("dsSenha", usuario.getDsSenha()));
+		criterio.add(Restrictions.eq("dsLogin", login));
+		criterio.add(Restrictions.eq("dsSenha", senha));
 		user = (Usuario)criterio.uniqueResult();
 		return user;
 	}

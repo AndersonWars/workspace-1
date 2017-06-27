@@ -18,6 +18,16 @@
         <param-value>native</param-value>
     </context-param>
     
+    <context-param>
+    	<param-name>primefaces.FONT_AWESOME</param-name>
+    	<param-value>true</param-value>
+    </context-param>
+    
+    <context-param>
+    	<param-name>primefaces.THEME</param-name>
+    	<param-value>sunny</param-value>
+    </context-param>
+    
     <!-- Configuração do JSF -->
     <servlet>
         <servlet-name>Faces Servlet</servlet-name>
@@ -28,4 +38,17 @@
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>*.xhtml</url-pattern>
     </servlet-mapping>
+    
+    <filter>
+		<filter-name>LoginFilter</filter-name>
+		<filter-class>br.com.renan.andrade.util.LoginFilter</filter-class>    
+	</filter>
+	<filter-mapping>
+		<filter-name>LoginFilter</filter-name>
+		<url-pattern>/pages/*</url-pattern>
+	</filter-mapping> 
+	
+	<session-config>
+    	<session-timeout>60</session-timeout>
+    </session-config>
 </web-app>

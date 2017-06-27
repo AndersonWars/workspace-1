@@ -9,6 +9,7 @@ import org.omnifaces.util.*;
 
 import br.com.renan.andrade.dao.*;
 import br.com.renan.andrade.domain.*;
+import br.com.renan.andrade.util.*;
 
 @SuppressWarnings("serial")
 @ManagedBean
@@ -16,7 +17,7 @@ import br.com.renan.andrade.domain.*;
 public class UsuarioBean implements Serializable{
 	
 	private Usuario usuario;
-	private String confSenha;
+	private String confSenha,dsSenha;
 	
 	@PostConstruct
 	public void novo(){
@@ -25,10 +26,11 @@ public class UsuarioBean implements Serializable{
 		confSenha = "";
 	}
 	
-	public void salvar(){
+	public String salvar(){
 		try{
 			UsuarioDao dao = new UsuarioDao();
 			if (validateSenha()) {
+				usuario.setDsSenha(CryptoUtil.generateCryptedPassword(getDsSenha()));
 				dao.merge(usuario);
 				Messages.addGlobalInfo("Usuário cadastrado");
 				novo();
@@ -37,6 +39,7 @@ public class UsuarioBean implements Serializable{
 			Messages.addGlobalError("Erro ao cadastrar usuário");
 			e.printStackTrace();
 		}
+		return "/templates/home.xhtml?faces-redirect=true";
 	}
 
 	public Usuario getUsuario() {
@@ -55,8 +58,16 @@ public class UsuarioBean implements Serializable{
 		this.confSenha = confSenha;
 	}
 	
+	public String getDsSenha() {
+		return dsSenha;
+	}
+
+	public void setDsSenha(String dsSenha) {
+		this.dsSenha = dsSenha;
+	}
+
 	private Boolean validateSenha() {
-		if (!usuario.getDsSenha().equals(confSenha)) {
+		if (!getDsSenha().equals(confSenha)) {
 			Messages.addGlobalError("Senha não confere. Tente novamente");
 			return false;
 		}

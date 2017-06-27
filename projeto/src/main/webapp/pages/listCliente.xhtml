@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+xmlns:h="http://xmlns.jcp.org/jsf/html"
+xmlns:p="http://primefaces.org/ui"
+xmlns:pe="http://primefaces.org/ui/extensions"
+xmlns:f="http://xmlns.jcp.org/jsf/core"
+xmlns:ui="http://java.sun.com/jsf/facelets"
+template="/templates/principal.xhtml">
+	<ui:define name="telas">
+		<h:body>
+			<h:form id="frmTab">
+				<p:dataTable id="table" emptyMessage="Sem Registros" paginator="true" value="#{listClienteBean.clientes}" var="cli">
+					<f:facet name="header">Lista de Clientes</f:facet>
+					<p:column><p:rowToggler/></p:column>
+					<p:column headerText="Id">
+						<h:outputText value="#{cli.codCliente}" />
+					</p:column>
+					<p:column headerText="Nome">
+						<h:outputText value="#{cli.nomeCliente}" />
+					</p:column>
+					<p:rowExpansion>
+						<h:panelGrid columns="2">
+							<p:outputLabel value="Nome"/>
+							<h:outputText value="#{cli.nomeCliente}"/>
+							<p:outputLabel value="CPF"/>
+							<h:outputText value="#{cli.cpfCliente}" />
+							<p:outputLabel value="E-mail" />
+							<h:outputText value="#{cli.emailCliente}" />
+							<p:outputLabel value="Telefone" />
+							<h:outputText value="#{cli.telCliente}" />
+							<p:outputLabel value="CEP" />
+							<h:outputText value="#{cli.enderecoCliente.cepEndereco}" />
+							<p:outputLabel value="Estado" />
+							<h:outputText value="#{cli.enderecoCliente.cdUf.nome}" />
+							<p:outputLabel value="Cidade" />
+							<h:outputText value="#{cli.enderecoCliente.cidEndereco}" />
+							<p:outputLabel value="Bairro" />
+							<h:outputText value="#{cli.enderecoCliente.bairroEndereco}" />
+							<p:outputLabel value="Rua" />
+							<h:outputText value="#{cli.enderecoCliente.ruaEndereco}" />
+							<p:outputLabel value="Número" />
+							<h:outputText value="#{cli.enderecoCliente.nuLogradouro}" />
+						</h:panelGrid>
+						<p:commandButton value="Excluir" actionListener="#{listClienteBean}" update=":frmTab:table">
+							<p:confirm  header="Confirmação" message="Excluir produto?" icon="ui-icon-alert"/>
+							<f:attribute name="cliE" value="#{cli}"/>
+						</p:commandButton>
+					</p:rowExpansion>
+				</p:dataTable>
+				<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+					<p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"></p:commandButton>
+					<p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"></p:commandButton>
+				</p:confirmDialog>
+			</h:form>
+		</h:body>
+	</ui:define>
+</ui:composition>

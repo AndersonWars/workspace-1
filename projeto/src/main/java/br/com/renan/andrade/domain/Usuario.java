@@ -18,8 +18,9 @@ public class Usuario implements Serializable{
 	@Column(length=100)
 	private String dsLogin;
 	
-	@Column(length=20)
-	private String dsSenha;
+	@Lob
+	@Column
+	private byte[] dsSenha;
 	
 	@Column
 	private Boolean alteraCli;
@@ -54,11 +55,11 @@ public class Usuario implements Serializable{
 		this.dsLogin = dsLogin;
 	}
 
-	public String getDsSenha() {
+	public byte[] getDsSenha() {
 		return dsSenha;
 	}
 
-	public void setDsSenha(String dsSenha) {
+	public void setDsSenha(byte[] dsSenha) {
 		this.dsSenha = dsSenha;
 	}
 
